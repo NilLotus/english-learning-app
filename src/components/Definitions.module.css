@@ -1,0 +1,21 @@
+.Definitions{
+    list-style-type: none;
+}
+.definitionsItem{
+    margin: 16px 0;
+}
+.definition{
+    display: flex;
+    align-items: baseline
+}
+.counter{
+    font-size: 16px;
+    font-weight: bold;
+    padding-right: 8px;
+}
+.example{
+    font-size: 14px;
+    color: #a7a7ad;
+    padding-left: 20px;
+    font-family: 'openSans';
+}

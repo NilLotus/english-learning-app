@@ -1,0 +1,17 @@
+.Antonyms{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.antonymsItem{
+    padding: 4px;
+    border: 1px solid #ff00002b;
+    margin: 2px;
+    background: #ff000012;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.title{
+    margin: 8px 0;
+}

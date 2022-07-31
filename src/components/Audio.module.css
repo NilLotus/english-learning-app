@@ -1,0 +1,16 @@
+.Audio {
+    width: 30px;
+    height: 30px;
+    padding: 0 4px;
+}
+.american{
+    color: blue;
+    fill: red;
+}
+.british{
+    color: red;
+}
+.australian{
+    color: green;
+}
+

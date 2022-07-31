@@ -1,0 +1,17 @@
+.Synonyms{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.synonymsItem{
+    padding: 4px;
+    border: 1px solid #0080004a;
+    margin: 2px;
+    background: #00800017;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.title{
+    margin: 8px 0;
+}
