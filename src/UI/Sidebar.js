@@ -22,7 +22,7 @@ const Sidebar = () => {
             <span>Dictionary</span>
           </li>
         </Link>
-        <Link to="/flashcard">
+        <Link to="/flashcards">
           <li>
             <FaSwatchbook />
             <span>Flashcards</span>

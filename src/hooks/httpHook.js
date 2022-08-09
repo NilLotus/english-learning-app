@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useHttp = () => {
+const useHttp = (props) => {
   const [wordMeanings, setWordMeanings] = useState([]);
   const [phonetics, setPhonetics] = useState([]);
   const [wordTitle, setWordTitle] = useState("");

@@ -1,0 +1,19 @@
+.sign-in{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: 1px solid gray;
+    height: 34px;
+    color: gray;
+    border-radius: 6px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.sign-in span{
+    font-size: 14px;
+}
+.login-icon{
+    font-size: 23px;
+    margin-left: 10px;
+}

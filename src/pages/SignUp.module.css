@@ -1,0 +1,57 @@
+.signing-page {
+  height: calc(100vh - 48px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+.sign-up {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 32px;
+}
+.title {
+  margin-bottom: 32px;
+}
+
+.submit {
+  font-size: 15px;
+  height: 31px;
+  border-radius: 4px;
+  width: 100%;
+  border: 1px solid #000;
+  background: #838282;
+  color: #fff;
+  cursor: pointer;
+  margin: 24px 0;
+}
+
+.toggleForm {
+  width: 50%;
+  padding: 0;
+  text-align: center;
+}
+.toggleForm legend {
+  padding: 8px;
+}
+.toggleForm fieldset {
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 0px;
+  border-top: 2px solid #dcdcdc;
+  border-width: 1px;
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #9f9f9f;
+}
+.toggleLink {
+  border: 1px solid #b2b2b2;
+  font-size: 15px;
+  height: 31px;
+  display: flex;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  color: #838282;
+  text-decoration: none;
+}

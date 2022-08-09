@@ -1,0 +1,26 @@
+.form-control{
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+.form-control input{
+    height: 29px;
+    border: 1px solid rgb(169, 168, 168);
+    border-radius: 4px;
+    padding: 0 4px;
+    margin: 4px 0 2px ;
+}
+.form-control .invalid{
+    border-color: #ee5e5e;
+    background: #ffe6e6;
+    outline: #ee5e5e;
+    box-shadow: 0 0 6px #b9a7a7;
+}
+.form-control .invalid:focus {
+    border: 2px solid #ee5e5e;
+}
+.error{
+    color: red;
+    font-size: 13px;
+}

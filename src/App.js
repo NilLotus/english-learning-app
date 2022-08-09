@@ -9,7 +9,10 @@ import FlashCardsPage from "./pages/FlashCards";
 import NewNotePage from "./pages/NewNote";
 import NotFoundPage from "./pages/NotFound";
 import StoryPage from "./pages/Story";
+import SignInPage from "./pages/SignIn";
+import SignUpPage from "./pages/SignUp";
 import Layout from "./UI/Layout";
+import PrivateRoute from "./utils/PrivertRoute";
 
 function App() {
   return (
@@ -21,12 +24,12 @@ function App() {
         <Route path="/dictionary/:word?" >
           <DictionaryPage/>
         </Route>
-        <Route path="/flashcards">
+        <PrivateRoute path="/flashcards">
           <FlashCardsPage />
-        </Route>
-        <Route path="/notes">
+        </PrivateRoute>
+        <PrivateRoute path="/notes">
           <AllNotesPage />
-        </Route>
+        </PrivateRoute>
         <Route path="/new-note">
           <NewNotePage />
         </Route>
@@ -35,6 +38,12 @@ function App() {
         </Route>
         <Route path="/story:storyName">
           <StoryPage />
+        </Route>
+        <Route path='/sign-in'>
+          <SignInPage />
+        </Route>
+        <Route path='/sign-up'>
+          <SignUpPage />
         </Route>
         <Route>
           <NotFoundPage />

@@ -1,0 +1,28 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+}
+.input-wrapper{
+    width: 400px;
+    height: 32px;
+    border: 1px solid #787474;
+    border-radius: 16px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+.input{
+    border: none;
+    outline: none;
+    font-size: 17px;
+    width: calc(100% - 23px);
+}
+.search-icon{
+    font-size: 23px;
+}
+.search-btn{
+    border: none;
+    background: none;
+    height: 23px;
+}
