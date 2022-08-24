@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 
 import useHttp from "../hooks/httpHook";
@@ -6,13 +6,13 @@ import Meanings from "./Meanings";
 import Pronunciation from "./Pronunciation";
 import { IoSearchOutline } from "react-icons/io5";
 import classes from "./Dictionary.module.css";
-import AuthContext from "../store/Auth-context";
 import LoginButton from "./LoginButton";
 
 const Dictionary = (props) => {
   const [enteredWord, setEnteredWord] = useState(null);
 
   const params = useParams();
+
   const location = useLocation();
 
   const inputValue = useRef();
@@ -58,11 +58,16 @@ const Dictionary = (props) => {
   const setNewWordHandler = (word) => {
     inputValue.current.value = "";
     setEnteredWord(word);
+    window.history.pushState(
+      null,
+      word,
+      `/dictionary/${word}`
+    );
   };
 
   useEffect(() => {
     setEnteredWord(params.word);
-  }, []);
+  }, [params.word]);
 
   useEffect(() => {
     if (location.pathname.includes("/dictionary/")) {

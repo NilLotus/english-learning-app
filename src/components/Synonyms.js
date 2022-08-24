@@ -1,8 +1,3 @@
-import { useRef } from "react";
-
-import useHttp from "../hooks/httpHook";
-import Pronunciation from "./Pronunciation";
-import Meanings from "./Meanings";
 import classes from "./Synonyms.module.css";
 
 const Synonyms = (props) => {
