@@ -1,4 +1,6 @@
 import { Route, Switch } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import "./App.css";
 import AllNotesPage from "./pages/AllNotes";
@@ -13,16 +15,21 @@ import SignInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
 import Layout from "./UI/Layout";
 import PrivateRoute from "./utils/PrivertRoute";
+import { fetchFlashcardsData } from "./app/flashcardsData-actions";
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchFlashcardsData());
+  }, [dispatch]);
   return (
     <Layout className="App">
       <Switch>
         <Route path="/" exact>
-          <DashboardPage/>
+          <DashboardPage />
         </Route>
-        <Route path="/dictionary/:word?" >
-          <DictionaryPage/>
+        <Route path="/dictionary/:word?">
+          <DictionaryPage />
         </Route>
         <PrivateRoute path="/flashcards">
           <FlashCardsPage />
@@ -39,10 +46,10 @@ function App() {
         <Route path="/story:storyName">
           <StoryPage />
         </Route>
-        <Route path='/sign-in'>
+        <Route path="/sign-in">
           <SignInPage />
         </Route>
-        <Route path='/sign-up'>
+        <Route path="/sign-up">
           <SignUpPage />
         </Route>
         <Route>
@@ -51,6 +58,6 @@ function App() {
       </Switch>
     </Layout>
   );
-}
+};
 
 export default App;

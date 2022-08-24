@@ -5,16 +5,13 @@ import Card from '../UI/Card'
 import classes from "./Meanings.module.css";
 
 const Meanings = (props) => {
-  let counter = 0;
   const meaningContent = (
     <ul className={classes.Definitions}>
       {props.wordMeanings.map((meaning) => {
-        counter++;
+        const uniqueNumber = Math.random().toString();
         return (
-          <Card>
-            <li
-              key={`${meaning.partOfSpeech}_${counter}`}
-            >
+          <Card key={`${meaning.partOfSpeech}_${uniqueNumber}`}>
+            <li>
               <h3>{meaning.partOfSpeech}</h3>
               <Definitions definitions={meaning.definitions} />
               {meaning.synonyms.length > 0 && (

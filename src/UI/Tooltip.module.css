@@ -1,0 +1,19 @@
+.tooltip {
+  position: relative;
+  padding: 6px 12px;
+}
+.tooltip-text {
+  background: rgba(0, 0, 0, 0.75);
+  visibility: hidden;
+  padding: 4px;
+  color: #fff;
+  border-radius: 4px;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+}
+.tooltip:hover .tooltip-text{
+    visibility: visible;
+}

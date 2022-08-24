@@ -1,6 +1,26 @@
+.word-title {
+  display: flex;
+}
+.add-word {
+  border: none;
+  background: none;
+}
+.add {
+  font-size: 21px;
+}
+.clicked {
+  font-size: 21px;
+  color: green;
+}
+.add::before {
+  content: "Add To Flashcard";
+  width: auto;
+  /* height: 30px; */
+  padding: 8px;
+}
+
 .phonetic {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}

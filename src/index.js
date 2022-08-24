@@ -5,12 +5,16 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import "./assets/fonts/OpenSans-Italic.ttf";
 import { AuthContextProvider } from "./store/Auth-context";
+import store from './app/store'
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AuthContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </AuthContextProvider>
+  <Provider store={store}>
+    <AuthContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AuthContextProvider>
+  </Provider>
 );

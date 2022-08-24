@@ -12,10 +12,6 @@ import LoginButton from "./LoginButton";
 const Dictionary = (props) => {
   const [enteredWord, setEnteredWord] = useState(null);
 
-  // const AuthCtx = useContext(AuthContext);
-  // console.log(AuthCtx.isLoggedIn);
-  // console.log(AuthCtx.token);
-
   const params = useParams();
   const location = useLocation();
 
