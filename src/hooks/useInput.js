@@ -11,7 +11,7 @@ const useInput = (props) => {
     const currentValue = event.target.value;
     setIsTouched(false);
     setInputValue(currentValue);
-    {props.secondCondition && props.secondCondition(currentValue)}
+      props.secondCondition && props.secondCondition(currentValue);
     if (props.condition(currentValue)) {
       setIsValid(true);
     } else {
