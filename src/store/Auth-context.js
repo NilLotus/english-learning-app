@@ -6,6 +6,7 @@ const AuthContext = createContext({
   signUp: () => {},
   login: (token, email) => {},
   logout: (token, email) => {},
+  check: () => {},
 });
 export default AuthContext;
 
@@ -20,7 +21,7 @@ export const AuthContextProvider = (props) => {
   const [token, setToken] = useState(initialToken);
   const [email, setEmail] = useState(initialEmail);
 
-  const isLoggedIn = !!token;
+  let isLoggedIn = !!token;
 
   const signUpHandler = (idToken, email) => {
     setToken(idToken);
@@ -33,15 +34,33 @@ export const AuthContextProvider = (props) => {
     setToken(idToken);
     setEmail(email);
     localStorage.setItem("token", idToken);
-    localStorage.setItem("tokenExpireTime", new Date().getTime() + 3600000);
+    localStorage.setItem("tokenExpireTime", new Date().getTime() + 5000);
     localStorage.setItem("userName", email);
   };
+
   const logoutHandler = () => {
     setToken(null);
     setEmail(null);
     localStorage.removeItem("token");
     localStorage.removeItem("tokenExpireTime");
     localStorage.removeItem("userName");
+  };
+
+  const checkLoggedIn = () => {
+    return new Promise((resolve, reject) => {
+      const tokenExpireTime = +localStorage.getItem("tokenExpireTime");
+      const now = new Date().getTime();
+      if (now > tokenExpireTime) {
+        setToken(null);
+        setEmail(null);
+        localStorage.removeItem("token");
+        localStorage.removeItem("tokenExpireTime");
+        localStorage.removeItem("userName");
+        reject("Token has expired!");
+      } else {
+        resolve();
+      }
+    });
   };
   const contextValue = {
     token,
@@ -50,6 +69,7 @@ export const AuthContextProvider = (props) => {
     login: loginHandler,
     logout: logoutHandler,
     signUp: signUpHandler,
+    check: checkLoggedIn,
   };
 
   return (

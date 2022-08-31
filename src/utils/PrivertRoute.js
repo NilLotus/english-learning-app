@@ -1,24 +1,28 @@
 import { Redirect, Route } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../store/Auth-context";
 
 const PrivateRoute = ({ children: Component, path, ...rest }) => {
-  let auth = false;
+  const AuthCtx = useContext(AuthContext);
+  const auth = AuthCtx.isLoggedIn;
 
-  let token = localStorage.getItem("token");
-  if (token) {
-    let tokenExpireTime = +localStorage.getItem("tokenExpireTime");
-    let now = new Date().getTime();
+  AuthCtx.check();
 
-    if (now > tokenExpireTime) {
-      auth = false;
-      localStorage.removeItem("token");
-      localStorage.removeItem("tokenExpireTime");
-      localStorage.removeItem("userName");
-    } else {
-      auth = true;
-    }
-  } else {
-    auth = false;
-  }
+  // if (token) {
+  //   let tokenExpireTime = +localStorage.getItem("tokenExpireTime");
+  //   let now = new Date().getTime();
+
+  //   if (now > tokenExpireTime) {
+  //     auth = false;
+  //     AuthCtx.logout();
+  //   } 
+    // else {
+    //   auth = true;
+    // }
+  // }
+  //  else {
+  //   auth = false;
+  // }
 
   return auth ? (
     <Route {...rest} render={() => Component} />
