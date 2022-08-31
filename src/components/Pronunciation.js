@@ -1,41 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { BsBookmarkPlus, BsBookmarkCheck } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 
 import Audio from "./Audio";
 import { flashcardsActions } from "../app/flashcardsItems-slice";
-import {
-  sendFlashcardsData,
-} from "../app/flashcardsData-actions";
+import { sendFlashcardsData } from "../app/flashcardsData-actions";
+import AuthContext from "../store/Auth-context";
 import Tooltip from "../UI/Tooltip";
 import classes from "./Pronunciation.module.css";
 
 const Pronunciation = (props) => {
   const dispatch = useDispatch();
+  const AuthCtx = useContext(AuthContext);
+  const history = useHistory();
 
   const items = useSelector((state) => state.items.words);
 
   const [clicked, setClicked] = useState(false);
 
-  const addToFlashcardsHandler = () => {
+  const addToFlashcardsHandler = async () => {
     !clicked && setClicked(true);
-    dispatch(
-      flashcardsActions.add({
-        word: props.word,
-        view: 0,
-        correct: 0,
-        wrong: 0,
-        id: props.word !== "" && props.word,
-      })
-    );
-
-    const itemIndex = items.findIndex((item) => {
-      return item.id === props.word;
-    });
-
-    if (itemIndex < 0) {
+    AuthCtx.check().then(() =>{
       dispatch(
-        sendFlashcardsData({
+        flashcardsActions.add({
           word: props.word,
           view: 0,
           correct: 0,
@@ -43,9 +31,28 @@ const Pronunciation = (props) => {
           id: props.word !== "" && props.word,
         })
       );
-    }
-  };
 
+      const itemIndex = items.findIndex((item) => {
+        return item.id === props.word;
+      });
+
+      if (itemIndex < 0) {
+        dispatch(
+          sendFlashcardsData({
+            word: props.word,
+            view: 0,
+            correct: 0,
+            wrong: 0,
+            id: props.word !== "" && props.word,
+          })
+        );
+      }
+    }).catch((e)=>{
+      const location = history.location.pathname;
+      history.push('/sign-in?path=' + location);
+      console.log(e);
+    })
+  }
   useEffect(() => {
     setClicked(false);
   }, [props.word]);
