@@ -6,8 +6,8 @@ const Synonyms = (props) => {
     props.onClick(clickedWord);
   };
 
-  const synonymsContent = (
-    <ul className={classes.Synonyms}>
+  const synonymsContent =(
+      <ul className={classes.Synonyms}>
       {props.synonyms.map((syn) => {
         return (
           <li
@@ -20,7 +20,7 @@ const Synonyms = (props) => {
         );
       })}
     </ul>
-  );
+    )
 
   return (
     <>

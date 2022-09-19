@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useHistory } from "react-router-dom";
 
 import useHttp from "../hooks/httpHook";
 import Meanings from "./Meanings";
@@ -14,6 +14,7 @@ const Dictionary = (props) => {
   const params = useParams();
 
   const location = useLocation();
+  const history = useHistory()
 
   const inputValue = useRef();
   const {
@@ -36,11 +37,12 @@ const Dictionary = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (enteredWord === inputValue.current.value) {
-        window.history.pushState(
-          null,
-          enteredWord,
-          `/dictionary/${enteredWord}`
-        );
+        // window.history.pushState(
+        //   null,
+        //   enteredWord,
+        //   `/dictionary/${enteredWord}`
+        // );
+        history.push(`/dictionary/${enteredWord}`);
         sendRequest(enteredWord);
       }
     }, 1000);
@@ -58,11 +60,12 @@ const Dictionary = (props) => {
   const setNewWordHandler = (word) => {
     inputValue.current.value = "";
     setEnteredWord(word);
-    window.history.pushState(
-      null,
-      word,
-      `/dictionary/${word}`
-    );
+    // window.history.pushState(
+    //   null,
+    //   word,
+    //   `/dictionary/${word}`
+    // );
+    history.push(`/dictionary/${word}`)
   };
 
   useEffect(() => {
