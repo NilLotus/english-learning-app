@@ -52,7 +52,7 @@ const SignInPage = (props) => {
 
   const sendRequest = async () => {
     setNotification(false);
-    let apiKey = "AIzaSyBhY_MRaXZTIX3CnorfD9Ru4Hrod60n4xU";
+    let apiKey = "AIzaSyD0iWDZ1ABlsuooDbitUTmj93_GWg8CRyA";
     const response = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
       {
@@ -68,7 +68,6 @@ const SignInPage = (props) => {
       }
     );
     const data = await response.json();
-    console.log({ data });
     if (data["error"] && data["error"]["message"]) {
       setNotification(true);
       setErrorMessage(data.error.message);

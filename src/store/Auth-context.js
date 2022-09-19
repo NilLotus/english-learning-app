@@ -1,8 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { flashcardsActions } from "../app/flashcardsItems-slice";
 
 const AuthContext = createContext({
   token: "",
   isLoggedIn: false,
+  email: "",
   signUp: () => {},
   login: (token, email) => {},
   logout: (token, email) => {},
@@ -11,15 +15,14 @@ const AuthContext = createContext({
 export default AuthContext;
 
 export const AuthContextProvider = (props) => {
-  let initialToken = localStorage.getItem("token")
-    ? localStorage.getItem("token")
-    : "";
-  let initialEmail = localStorage.getItem("email")
-    ? localStorage.getItem("email")
-    : "";
+  const dispatch = useDispatch();
+  const [token, setToken] = useState("");
+  const [email, setEmail] = useState("");
 
-  const [token, setToken] = useState(initialToken);
-  const [email, setEmail] = useState(initialEmail);
+  useEffect(() => {
+    localStorage.getItem("token") && setToken(localStorage.getItem("token"));
+    localStorage.getItem("email") && setEmail(localStorage.getItem("email"));
+  }, []);
 
   let isLoggedIn = !!token;
 
@@ -34,7 +37,7 @@ export const AuthContextProvider = (props) => {
     setToken(idToken);
     setEmail(email);
     localStorage.setItem("token", idToken);
-    localStorage.setItem("tokenExpireTime", new Date().getTime() + 5000);
+    localStorage.setItem("tokenExpireTime", new Date().getTime() + 3600000);
     localStorage.setItem("userName", email);
   };
 
@@ -56,6 +59,7 @@ export const AuthContextProvider = (props) => {
         localStorage.removeItem("token");
         localStorage.removeItem("tokenExpireTime");
         localStorage.removeItem("userName");
+        dispatch(flashcardsActions.clear());
         reject("Token has expired!");
       } else {
         resolve();

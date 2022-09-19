@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./App.css";
 import AllNotesPage from "./pages/AllNotes";
@@ -16,12 +16,19 @@ import SignUpPage from "./pages/SignUp";
 import Layout from "./UI/Layout";
 import PrivateRoute from "./utils/PrivertRoute";
 import { fetchFlashcardsData } from "./app/flashcardsData-actions";
+import AuthContext from "./store/Auth-context";
 
 const App = () => {
   const dispatch = useDispatch();
+  const authCtx = useContext(AuthContext);
+  const user = authCtx.email && authCtx.email.split('.')[0];
+  console.log(user);
+
   useEffect(() => {
     dispatch(fetchFlashcardsData());
-  }, [dispatch]);
+  }, [dispatch, user]);
+  const items = useSelector(state =>state.items.words)
+  console.log(items);
   return (
     <Layout className="App">
       <Switch>

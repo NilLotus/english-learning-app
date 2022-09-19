@@ -1,7 +1,7 @@
 import Antonyms from "./Antonyms";
 import Definitions from "./Definitions";
 import Synonyms from "./Synonyms";
-import Card from '../UI/Card'
+import Card from "../UI/Card";
 import classes from "./Meanings.module.css";
 
 const Meanings = (props) => {
@@ -15,10 +15,20 @@ const Meanings = (props) => {
               <h3>{meaning.partOfSpeech}</h3>
               <Definitions definitions={meaning.definitions} />
               {meaning.synonyms.length > 0 && (
-                <Synonyms synonyms={meaning.synonyms} onClick={props.onClick} />
+                <Synonyms
+                  synonyms={meaning.synonyms.filter((syn, index) => {
+                    return meaning.synonyms.indexOf(syn) === index;
+                  })}
+                  onClick={props.onClick}
+                />
               )}
               {meaning.antonyms.length > 0 && (
-                <Antonyms antonyms={meaning.antonyms} onClick={props.onClick} />
+                <Antonyms
+                  antonyms={meaning.antonyms.filter((ant, index) => {
+                    return meaning.antonyms.indexOf(ant) === index;
+                  })}
+                  onClick={props.onClick}
+                />
               )}
             </li>
           </Card>

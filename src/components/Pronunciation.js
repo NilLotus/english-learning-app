@@ -5,7 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Audio from "./Audio";
 import { flashcardsActions } from "../app/flashcardsItems-slice";
-import { sendFlashcardsData } from "../app/flashcardsData-actions";
+import {
+  sendFlashcardsData,
+  // fetchFlashcardsData,
+} from "../app/flashcardsData-actions";
 import AuthContext from "../store/Auth-context";
 import Tooltip from "../UI/Tooltip";
 import classes from "./Pronunciation.module.css";
@@ -14,31 +17,17 @@ const Pronunciation = (props) => {
   const dispatch = useDispatch();
   const AuthCtx = useContext(AuthContext);
   const history = useHistory();
-
-  const items = useSelector((state) => state.items.words);
-
+  
+  const items = useSelector(state => state.items.words)
+  const user = useSelector(state => state.items.userId)
   const [clicked, setClicked] = useState(false);
 
-  const addToFlashcardsHandler = async () => {
+  const addToFlashcardsHandler = () => {
     !clicked && setClicked(true);
-    AuthCtx.check().then(() =>{
-      dispatch(
-        flashcardsActions.add({
-          word: props.word,
-          view: 0,
-          correct: 0,
-          wrong: 0,
-          id: props.word !== "" && props.word,
-        })
-      );
-
-      const itemIndex = items.findIndex((item) => {
-        return item.id === props.word;
-      });
-
-      if (itemIndex < 0) {
+    AuthCtx.check()
+      .then(() => {
         dispatch(
-          sendFlashcardsData({
+          flashcardsActions.add({
             word: props.word,
             view: 0,
             correct: 0,
@@ -46,13 +35,30 @@ const Pronunciation = (props) => {
             id: props.word !== "" && props.word,
           })
         );
-      }
-    }).catch((e)=>{
-      const location = history.location.pathname;
-      history.push('/sign-in?path=' + location);
-      console.log(e);
-    })
-  }
+
+        const itemIndex = items.findIndex((item) => {
+          return item.id === props.word;
+        });
+
+        if (itemIndex < 0) {
+          dispatch(
+            sendFlashcardsData({
+              word: props.word,
+              view: 0,
+              correct: 0,
+              wrong: 0,
+              id: props.word !== "" && props.word,
+            })
+          );
+        }
+      })
+      .catch((e) => {
+        const location = history.location.pathname;
+        history.push("/sign-in?path=" + location);
+        // TODO: show the reason and error
+        console.log(e);
+      });
+  };
   useEffect(() => {
     setClicked(false);
   }, [props.word]);
@@ -65,7 +71,7 @@ const Pronunciation = (props) => {
           className={classes["add-word"]}
           onClick={addToFlashcardsHandler}
         >
-          {clicked ? (
+          {clicked && AuthCtx.isLoggedIn  ? (
             <Tooltip title="Added">
               <BsBookmarkCheck className={classes.clicked} />
             </Tooltip>
