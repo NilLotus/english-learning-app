@@ -13,7 +13,12 @@ const Overlay = (props) => {
       <div className={classes.content}>{props.message}</div>
       <footer className={classes.footer}>
         <div className={classes.action}>
-          <button onClick={props.onClick}>Ok</button>
+          <button onClick={props.onClick}>{props.firstTextButton ? props.firstTextButton : 'OK'}</button>
+          {props.secondOnClick && (
+            <button onClick={props.secondOnClick}>
+              {props.secondTextButton}
+            </button>
+          )}
         </div>
       </footer>
     </div>
@@ -32,6 +37,9 @@ const Modal = (props) => {
           onClick={props.onClick}
           title={props.title}
           message={props.message}
+          secondOnClick={props.secondOnClick}
+          secondTextButton={props.secondTextButton}
+          firstTextButton={props.firstTextButton}
         />,
         document.getElementById("overlay-root")
       )}

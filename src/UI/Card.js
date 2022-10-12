@@ -4,6 +4,7 @@ const Card = (props) => {
   const cardClass = classes.card;
   return (
     <div
+    onClick={props.onClick}
       className={
         props.className ? `${cardClass} ${props.className}` : cardClass
       }
