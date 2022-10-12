@@ -20,9 +20,9 @@ export const fetchFlashcardsData = () => {
     try {
       const data = await fetchRequest();
       if (data.length > 0) {
-        dispatch(flashcardsActions.replace({data: data, id:id}));
+        dispatch(flashcardsActions.replace({data: data, id:id, isLoading: false}));
       } else {
-        dispatch(flashcardsActions.replace([]));
+        dispatch(flashcardsActions.replace({data: [], id:id, isLoading: false}));
       }
     } catch (e) {
       // TODO: show error in a way except log

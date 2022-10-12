@@ -81,7 +81,7 @@ const Dictionary = (props) => {
   const searchHandler = () => {
     setEnteredWord(inputValue);
   };
-
+  
   return (
     <>
       <div className={classes.navbar}>
@@ -104,6 +104,7 @@ const Dictionary = (props) => {
             word={wordTitle}
             phonetics={phonetics}
             pronunciations={pronunciations}
+            wordMeanings={wordMeanings}
           />
           <Meanings wordMeanings={wordMeanings} onClick={setNewWordHandler} />
         </>
