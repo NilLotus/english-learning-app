@@ -4,11 +4,13 @@ import { useParams, useHistory } from "react-router-dom";
 
 import StudyingWord from "./StudyingWord";
 import { flashcardsActions } from "../app/flashcardsItems-slice";
+import { updateFlashcardsData } from "../app/flashcardsData-actions";
 import classes from "./FlashcardsLevel.module.css";
 import Modal from "../UI/Modal";
 
 const FlashcardsLevel = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [id, setId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const params = useParams();
   const history = useHistory();
@@ -19,6 +21,11 @@ const FlashcardsLevel = (props) => {
   const sameLevelItems = items.filter(
     (i) => i.level === +params.level.split("")[6] - 1
   );
+  useEffect(() => {
+    const item = sameLevelItems.find(item => item.id === id);
+    console.log(item);
+    dispatch(updateFlashcardsData(item))
+  }, [items]);
 
   useEffect(() => {
     activeIndex > 0 && setActiveIndex(activeIndex - 1);
@@ -29,12 +36,15 @@ const FlashcardsLevel = (props) => {
   }, [activeIndex]);
 
   const correctAnswerHandler = (word) => {
-    dispatch(flashcardsActions.correct(word));
+    setId(word)
+    dispatch(flashcardsActions.correct({ word }));
     setActiveIndex((prevState) => prevState + 1);
   };
 
   const wrongAnswerHandler = (word) => {
+    setId(word)
     dispatch(flashcardsActions.wrong(word));
+    items.findIndex((i) => i.id === word);
     setActiveIndex((prevState) => prevState + 1);
   };
 
@@ -48,7 +58,6 @@ const FlashcardsLevel = (props) => {
     history.push("/flashcards/practice");
   };
 
-  console.log(sameLevelItems);
   return (
     <>
       <h2>{params.level}</h2>
