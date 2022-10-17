@@ -1,5 +1,5 @@
 import { Route, Switch } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./App.css";
@@ -17,22 +17,22 @@ import Study from "./components/Study";
 import Layout from "./UI/Layout";
 import PrivateRoute from "./utils/PrivertRoute";
 import { fetchFlashcardsData } from "./app/flashcardsData-actions";
-import AuthContext from "./store/Auth-context";
 import FlashcardsLevel from "./components/FlashcardsLevel";
 
 const App = () => {
   const dispatch = useDispatch();
-  const authCtx = useContext(AuthContext);
-  const user = authCtx.email && authCtx.email.split(".")[0];
+  const user = localStorage.getItem("userName") ? localStorage.getItem("userName").split(".")[0] : null;
 
   const isLoading = useSelector(state => state.items.isLoading);
+  const data = useSelector(state => state.items.words);
 
   useEffect(() => {
-    dispatch(fetchFlashcardsData());
-  }, [dispatch, user]);
+    !!user && dispatch(fetchFlashcardsData());
+  }, [user]);
   
   return (
-    isLoading ? <p>Loading ...</p> :<Layout className="App">
+    isLoading && !!user ? <p>Loading ...</p> :
+    <Layout className="App">
     <Switch>
       <Route path="/" exact>
         <DashboardPage />

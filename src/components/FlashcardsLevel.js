@@ -6,8 +6,9 @@ import StudyingWord from "./StudyingWord";
 import { flashcardsActions } from "../app/flashcardsItems-slice";
 import classes from "./FlashcardsLevel.module.css";
 import Modal from "../UI/Modal";
+import { updateFlashcardsData } from "../app/flashcardsData-actions";
 
-const FlashcardsLevel = (props) => {
+const FlashcardsLevel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const params = useParams();
@@ -28,7 +29,15 @@ const FlashcardsLevel = (props) => {
     if (activeIndex === sameLevelItems.length) setShowModal(true);
   }, [activeIndex]);
 
+  useEffect(()=>{
+    const item = sameLevelItems[activeIndex - 1]
+    console.log({item});
+    // updateFlashcardsData(item)
+    dispatch(updateFlashcardsData(item))
+  },[sameLevelItems])
+
   const correctAnswerHandler = (word) => {
+    // console.log(word);
     dispatch(flashcardsActions.correct(word));
     setActiveIndex((prevState) => prevState + 1);
   };
@@ -59,8 +68,8 @@ const FlashcardsLevel = (props) => {
         <div>
           <div className={classes["flashcards-content"]}>
             <StudyingWord
-              key={sameLevelItems[activeIndex]["id"]}
-              word={sameLevelItems[activeIndex]["id"]}
+              key={sameLevelItems[activeIndex]["word"]}
+              word={sameLevelItems[activeIndex]["word"]}
               phonetic={sameLevelItems[activeIndex]["phonetic"]}
               meaning={sameLevelItems[activeIndex]["meaning"]}
             />
@@ -68,14 +77,14 @@ const FlashcardsLevel = (props) => {
           <div className={classes["flashcard-actions"]}>
             <button
               onClick={() =>
-                correctAnswerHandler(sameLevelItems[activeIndex]["id"])
+                correctAnswerHandler(sameLevelItems[activeIndex]["word"])
               }
             >
               IK
             </button>
             <button
               onClick={() =>
-                wrongAnswerHandler(sameLevelItems[activeIndex]["id"])
+                wrongAnswerHandler(sameLevelItems[activeIndex]["word"])
               }
             >
               IDK
