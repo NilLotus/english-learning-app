@@ -21,7 +21,6 @@ export const flashcardsItemsSlice = createSlice({
       const itemIndex = state.words.findIndex((item) => {
         return item.word === action.payload;
       });
-      console.log(typeof state.words[itemIndex]["level"]);
       state.words[itemIndex] = {
         ...state.words[itemIndex],
         correct: ++state.words[itemIndex]["correct"],
@@ -34,7 +33,6 @@ export const flashcardsItemsSlice = createSlice({
       const itemIndex = state.words.findIndex((item) => {
         return item.word === action.payload;
       });
-      console.log(state.words[itemIndex]["level"]);
 
       state.words[itemIndex] = {
         ...state.words[itemIndex],

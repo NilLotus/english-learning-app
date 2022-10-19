@@ -4,11 +4,9 @@ import AuthContext from "../store/Auth-context";
 
 const PrivateRoute = ({ children: Component, path, ...rest }) => {
   const AuthCtx = useContext(AuthContext);
-  const auth = AuthCtx.isLoggedIn;
+  const checked = AuthCtx.check();
 
-  AuthCtx.check();
-  
-  return auth ? (
+  return checked ? (
     <Route {...rest} render={() => Component} />
   ) : (
     <Redirect to={`/sign-in?path=${path}`} />
