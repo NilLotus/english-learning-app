@@ -9,7 +9,6 @@ export const fetchFlashcardsData = () => {
   } else return;
   return async (dispatch) => {
     const fetchRequest = async () => {
-      // console.log('fetch');
       const response = await fetch(url + id + ".json");
       if (!response.ok) {
         throw new Error("Something went wrong in fetching data!");

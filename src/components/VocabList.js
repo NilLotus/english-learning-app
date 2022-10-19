@@ -5,7 +5,7 @@ const VocabularyList = () => {
   let vocabulary = (
     <ul>
       {items.map((element) => {
-        return <li key={element.id}>{element.word}</li>;
+        return <li key={element.word}>{element.word}</li>;
       })}
     </ul>
   );

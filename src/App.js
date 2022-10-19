@@ -23,21 +23,17 @@ import FlashcardsLevel from "./components/FlashcardsLevel";
 
 const App = () => {
   const dispatch = useDispatch();
+  const items = useSelector(state => state.items.words)
   const ctx = useContext(AuthContext);
-  console.log(ctx.isLoggedIn);
-  console.log(ctx.email);
-  const user = ctx.email;
 
   const isLoading = useSelector(state => state.items.isLoading);
 
-  useEffect(() => {
-    console.log('fetch');
-    console.log(!!user);
-    !!user && dispatch(fetchFlashcardsData());
-  }, [user]);
+  if (items.length === 0 && isLoading) {
+    dispatch(fetchFlashcardsData());
+  }
   
   return (
-    isLoading && !!user ? <p>Loading ...</p> :
+    isLoading && ctx.isLoggedIn ? <p>Loading ...</p> :
     <Layout className="App">
     <Switch>
       <Route path="/" exact>
