@@ -1,8 +1,10 @@
 import { Route, Switch } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./App.css";
+import AuthContext from "./store/Auth-context";
 import AllNotesPage from "./pages/AllNotes";
 import AllStoriesPage from "./pages/AllStories";
 import DashboardPage from "./pages/DashboardPage";
@@ -17,22 +19,26 @@ import Study from "./components/Study";
 import Layout from "./UI/Layout";
 import PrivateRoute from "./utils/PrivertRoute";
 import { fetchFlashcardsData } from "./app/flashcardsData-actions";
-import AuthContext from "./store/Auth-context";
 import FlashcardsLevel from "./components/FlashcardsLevel";
 
 const App = () => {
   const dispatch = useDispatch();
-  const authCtx = useContext(AuthContext);
-  const user = authCtx.email && authCtx.email.split(".")[0];
+  const ctx = useContext(AuthContext);
+  console.log(ctx.isLoggedIn);
+  console.log(ctx.email);
+  const user = ctx.email;
 
   const isLoading = useSelector(state => state.items.isLoading);
 
   useEffect(() => {
-    dispatch(fetchFlashcardsData());
-  }, [dispatch, user]);
+    console.log('fetch');
+    console.log(!!user);
+    !!user && dispatch(fetchFlashcardsData());
+  }, [user]);
   
   return (
-    isLoading ? <p>Loading ...</p> :<Layout className="App">
+    isLoading && !!user ? <p>Loading ...</p> :
+    <Layout className="App">
     <Switch>
       <Route path="/" exact>
         <DashboardPage />
@@ -40,12 +46,12 @@ const App = () => {
       <Route path="/dictionary/:word?">
         <DictionaryPage />
       </Route>
-      <Route path='/flashcards/practice/:level'>
+      <PrivateRoute path='/flashcards/practice/:level'>
         <FlashcardsLevel />
-      </Route>
-      <Route path="/flashcards/practice">
+      </PrivateRoute>
+      <PrivateRoute path="/flashcards/practice">
         <Study />
-      </Route>
+      </PrivateRoute>
       <PrivateRoute path="/flashcards" >
         <FlashCardsPage />
       </PrivateRoute>

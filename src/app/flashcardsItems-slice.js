@@ -5,18 +5,8 @@ export const flashcardsItemsSlice = createSlice({
   initialState: { words: [], userId: null, isLoading: true },
   reducers: {
     add(state, action) {
-      const itemIndex = state.words.findIndex((item) => {
-        return item.id === action.payload.id;
-      });
-
-      if (itemIndex >= 0) {
-        // TODO: add an error message
-        console.log("repeatitive");
-        return;
-      } else {
-        state.userId = localStorage.getItem("userName").split(".")[0];
-        state.words.push(action.payload);
-      }
+      state.userId = localStorage.getItem("userName").split(".")[0];
+      state.words.push(action.payload);
     },
     replace(state, action) {
       state.words = action.payload.data;
@@ -25,34 +15,34 @@ export const flashcardsItemsSlice = createSlice({
     clear(state) {
       state.words = [];
       state.userId = null;
+      state.isLoading = false
     },
     correct(state, action) {
       const itemIndex = state.words.findIndex((item) => {
-        return item.id === action.payload;
+        return item.word === action.payload;
       });
+      console.log(typeof state.words[itemIndex]["level"]);
       state.words[itemIndex] = {
         ...state.words[itemIndex],
         correct: ++state.words[itemIndex]["correct"],
-        level:
-          state.words[itemIndex]["correct"] > 0 &&
-          state.words[itemIndex]["correct"] % 2 === 0
-            ? ++state.words[itemIndex]["level"]
-            : state.words[itemIndex]["level"],
+        level: state.words[itemIndex]["level"] + 0.5,
         view:
           state.words[itemIndex]["wrong"] + state.words[itemIndex]["correct"],
       };
     },
     wrong(state, action) {
       const itemIndex = state.words.findIndex((item) => {
-        return item.id === action.payload;
+        return item.word === action.payload;
       });
+      console.log(state.words[itemIndex]["level"]);
+
       state.words[itemIndex] = {
         ...state.words[itemIndex],
         wrong: ++state.words[itemIndex]["wrong"],
         level:
           state.words[itemIndex]["level"] > 0
-            ? --state.words[itemIndex]["level"]
-            : state.words[itemIndex]["level"],
+            ? Math.floor(state.words[itemIndex]["level"])
+            : 0,
         view:
           state.words[itemIndex]["wrong"] + state.words[itemIndex]["correct"],
       };

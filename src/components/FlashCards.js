@@ -1,4 +1,6 @@
 import { Link, Route, Switch } from "react-router-dom";
+
+import PrivateRoute from "../utils/PrivertRoute";
 import VocabularyList from "./VocabList";
 
 const FlashCards = () => {
@@ -9,9 +11,9 @@ const FlashCards = () => {
       <Link to={`/flashcards/practice`}>Practice</Link>
 
       <Switch>
-        <Route path={`/flashcards/vocabulary-list`}>
+        <PrivateRoute path={`/flashcards/vocabulary-list`}>
           <VocabularyList />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </div>
   );

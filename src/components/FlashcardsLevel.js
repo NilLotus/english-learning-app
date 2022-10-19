@@ -6,10 +6,12 @@ import StudyingWord from "./StudyingWord";
 import { flashcardsActions } from "../app/flashcardsItems-slice";
 import classes from "./FlashcardsLevel.module.css";
 import Modal from "../UI/Modal";
+import { updateFlashcardsData } from "../app/flashcardsData-actions";
 
-const FlashcardsLevel = (props) => {
+const FlashcardsLevel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [word, setWord] = useState(null);
   const params = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -17,7 +19,7 @@ const FlashcardsLevel = (props) => {
   const items = useSelector((state) => state.items.words);
 
   const sameLevelItems = items.filter(
-    (i) => i.level === +params.level.split("")[6] - 1
+    (i) => Math.floor(i.level) === +params.level.split("")[6] - 1
   );
 
   useEffect(() => {
@@ -28,12 +30,19 @@ const FlashcardsLevel = (props) => {
     if (activeIndex === sameLevelItems.length) setShowModal(true);
   }, [activeIndex]);
 
+  useEffect(() => {
+    const item = items.find((item) => item.word === word);
+    !!word && dispatch(updateFlashcardsData(item));
+  }, [items]);
+
   const correctAnswerHandler = (word) => {
+    setWord(word);
     dispatch(flashcardsActions.correct(word));
     setActiveIndex((prevState) => prevState + 1);
   };
 
   const wrongAnswerHandler = (word) => {
+    setWord(word);
     dispatch(flashcardsActions.wrong(word));
     setActiveIndex((prevState) => prevState + 1);
   };
@@ -48,7 +57,6 @@ const FlashcardsLevel = (props) => {
     history.push("/flashcards/practice");
   };
 
-  console.log(sameLevelItems);
   return (
     <>
       <h2>{params.level}</h2>
@@ -59,8 +67,8 @@ const FlashcardsLevel = (props) => {
         <div>
           <div className={classes["flashcards-content"]}>
             <StudyingWord
-              key={sameLevelItems[activeIndex]["id"]}
-              word={sameLevelItems[activeIndex]["id"]}
+              key={sameLevelItems[activeIndex]["word"]}
+              word={sameLevelItems[activeIndex]["word"]}
               phonetic={sameLevelItems[activeIndex]["phonetic"]}
               meaning={sameLevelItems[activeIndex]["meaning"]}
             />
@@ -68,14 +76,14 @@ const FlashcardsLevel = (props) => {
           <div className={classes["flashcard-actions"]}>
             <button
               onClick={() =>
-                correctAnswerHandler(sameLevelItems[activeIndex]["id"])
+                correctAnswerHandler(sameLevelItems[activeIndex]["word"])
               }
             >
               IK
             </button>
             <button
               onClick={() =>
-                wrongAnswerHandler(sameLevelItems[activeIndex]["id"])
+                wrongAnswerHandler(sameLevelItems[activeIndex]["word"])
               }
             >
               IDK
@@ -85,7 +93,7 @@ const FlashcardsLevel = (props) => {
       )}
       {showModal &&
         activeIndex === sameLevelItems.length &&
-        !!sameLevelItems.length > 0 && (
+        sameLevelItems.length > 0 && (
           <Modal
             onClick={againReviewHandler}
             title="Completed"
