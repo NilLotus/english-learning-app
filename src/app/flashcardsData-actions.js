@@ -72,14 +72,9 @@ export const updateFlashcardsData=(item) =>{
   if (localStorage.getItem("userName")) {
     userId = localStorage.getItem("userName").split(".")[0];
   }
-  // let key = item.key;
-  // // delete item.key;
-  // console.log(url + userId + '/' + key + ".json");
-  // console.log(item);
   return async () => {
     const updateRequest = async () => {
       const newItem = {...item};
-      console.log({newItem});
       delete newItem.key;
       const response = await fetch(url + userId + '/' + item.key + ".json", {
         method: "PUT",

@@ -16,12 +16,14 @@ export default AuthContext;
 
 export const AuthContextProvider = (props) => {
   const dispatch = useDispatch();
-  const [token, setToken] = useState("");
-  const [email, setEmail] = useState("");
+  const [token, setToken] = useState(null);
+  const [email, setEmail] = useState(null);
 
   useEffect(() => {
-    localStorage.getItem("token") && setToken(localStorage.getItem("token"));
-    localStorage.getItem("email") && setEmail(localStorage.getItem("email"));
+    localStorage.getItem("token")
+      ? setToken(localStorage.getItem("token")) &&
+        setEmail(localStorage.getItem("email"))
+      : setEmail(null) && setToken(null);
   }, []);
 
   let isLoggedIn = !!token;
@@ -42,11 +44,11 @@ export const AuthContextProvider = (props) => {
   };
 
   const logoutHandler = () => {
-    setToken(null);
-    setEmail(null);
     localStorage.removeItem("token");
     localStorage.removeItem("tokenExpireTime");
     localStorage.removeItem("userName");
+    setToken(null);
+    setEmail(null);
   };
 
   const checkLoggedIn = () => {

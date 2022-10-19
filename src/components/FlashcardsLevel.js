@@ -11,6 +11,7 @@ import { updateFlashcardsData } from "../app/flashcardsData-actions";
 const FlashcardsLevel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [word, setWord] = useState(null);
   const params = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const FlashcardsLevel = () => {
   const items = useSelector((state) => state.items.words);
 
   const sameLevelItems = items.filter(
-    (i) => i.level === +params.level.split("")[6] - 1
+    (i) => Math.floor(i.level) === +params.level.split("")[6] - 1
   );
 
   useEffect(() => {
@@ -29,20 +30,19 @@ const FlashcardsLevel = () => {
     if (activeIndex === sameLevelItems.length) setShowModal(true);
   }, [activeIndex]);
 
-  useEffect(()=>{
-    const item = sameLevelItems[activeIndex - 1]
-    console.log({item});
-    // updateFlashcardsData(item)
-    dispatch(updateFlashcardsData(item))
-  },[sameLevelItems])
+  useEffect(() => {
+    const item = items.find((item) => item.word === word);
+    !!word && dispatch(updateFlashcardsData(item));
+  }, [items]);
 
   const correctAnswerHandler = (word) => {
-    // console.log(word);
+    setWord(word);
     dispatch(flashcardsActions.correct(word));
     setActiveIndex((prevState) => prevState + 1);
   };
 
   const wrongAnswerHandler = (word) => {
+    setWord(word);
     dispatch(flashcardsActions.wrong(word));
     setActiveIndex((prevState) => prevState + 1);
   };
@@ -57,7 +57,6 @@ const FlashcardsLevel = () => {
     history.push("/flashcards/practice");
   };
 
-  console.log(sameLevelItems);
   return (
     <>
       <h2>{params.level}</h2>
@@ -94,7 +93,7 @@ const FlashcardsLevel = () => {
       )}
       {showModal &&
         activeIndex === sameLevelItems.length &&
-        !!sameLevelItems.length > 0 && (
+        sameLevelItems.length > 0 && (
           <Modal
             onClick={againReviewHandler}
             title="Completed"

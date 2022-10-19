@@ -15,42 +15,34 @@ export const flashcardsItemsSlice = createSlice({
     clear(state) {
       state.words = [];
       state.userId = null;
+      state.isLoading = false
     },
     correct(state, action) {
       const itemIndex = state.words.findIndex((item) => {
         return item.word === action.payload;
       });
+      console.log(typeof state.words[itemIndex]["level"]);
       state.words[itemIndex] = {
         ...state.words[itemIndex],
         correct: ++state.words[itemIndex]["correct"],
-        level:
-          state.words[itemIndex]["level"] + 0.5,
+        level: state.words[itemIndex]["level"] + 0.5,
         view:
           state.words[itemIndex]["wrong"] + state.words[itemIndex]["correct"],
       };
-      // state.words[itemIndex] = {
-      //   ...state.words[itemIndex],
-      //   correct: ++state.words[itemIndex]["correct"],
-      //   level:
-      //     state.words[itemIndex]["correct"] > 0 &&
-      //     state.words[itemIndex]["correct"] % 2 === 0
-      //       ? ++state.words[itemIndex]["level"]
-      //       : state.words[itemIndex]["level"],
-      //   view:
-      //     state.words[itemIndex]["wrong"] + state.words[itemIndex]["correct"],
-      // };
     },
     wrong(state, action) {
       const itemIndex = state.words.findIndex((item) => {
         return item.word === action.payload;
       });
+      console.log(state.words[itemIndex]["level"]);
+
       state.words[itemIndex] = {
         ...state.words[itemIndex],
         wrong: ++state.words[itemIndex]["wrong"],
         level:
           state.words[itemIndex]["level"] > 0
-            ? --state.words[itemIndex]["level"]
-            : state.words[itemIndex]["level"],
+            ? Math.floor(state.words[itemIndex]["level"])
+            : 0,
         view:
           state.words[itemIndex]["wrong"] + state.words[itemIndex]["correct"],
       };

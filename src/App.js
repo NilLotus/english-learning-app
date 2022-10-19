@@ -1,8 +1,10 @@
 import { Route, Switch } from "react-router-dom";
+import { useContext } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./App.css";
+import AuthContext from "./store/Auth-context";
 import AllNotesPage from "./pages/AllNotes";
 import AllStoriesPage from "./pages/AllStories";
 import DashboardPage from "./pages/DashboardPage";
@@ -21,12 +23,16 @@ import FlashcardsLevel from "./components/FlashcardsLevel";
 
 const App = () => {
   const dispatch = useDispatch();
-  const user = localStorage.getItem("userName") ? localStorage.getItem("userName").split(".")[0] : null;
+  const ctx = useContext(AuthContext);
+  console.log(ctx.isLoggedIn);
+  console.log(ctx.email);
+  const user = ctx.email;
 
   const isLoading = useSelector(state => state.items.isLoading);
-  const data = useSelector(state => state.items.words);
 
   useEffect(() => {
+    console.log('fetch');
+    console.log(!!user);
     !!user && dispatch(fetchFlashcardsData());
   }, [user]);
   
@@ -40,12 +46,12 @@ const App = () => {
       <Route path="/dictionary/:word?">
         <DictionaryPage />
       </Route>
-      <Route path='/flashcards/practice/:level'>
+      <PrivateRoute path='/flashcards/practice/:level'>
         <FlashcardsLevel />
-      </Route>
-      <Route path="/flashcards/practice">
+      </PrivateRoute>
+      <PrivateRoute path="/flashcards/practice">
         <Study />
-      </Route>
+      </PrivateRoute>
       <PrivateRoute path="/flashcards" >
         <FlashCardsPage />
       </PrivateRoute>
