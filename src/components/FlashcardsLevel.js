@@ -1,12 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import { HiX } from "react-icons/hi";
+import { HiOutlineCheck } from "react-icons/hi";
+import { IoArrowBack } from "react-icons/io5";
 
+import Modal from "../UI/Modal";
+import Tooltip from "../UI/Tooltip";
 import StudyingWord from "./StudyingWord";
 import { flashcardsActions } from "../app/flashcardsItems-slice";
-import classes from "./FlashcardsLevel.module.css";
-import Modal from "../UI/Modal";
 import { updateFlashcardsData } from "../app/flashcardsData-actions";
+import classes from "./FlashcardsLevel.module.css";
 
 const FlashcardsLevel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -59,34 +63,45 @@ const FlashcardsLevel = () => {
 
   return (
     <>
-      <h2>{params.level}</h2>
+      <div className={classes["page-title"]}>
+        <Tooltip
+          className={classes["back-btn"]}
+          onClick={backToLevelMenuHandler}
+          title="Back"
+        >
+          <IoArrowBack />
+        </Tooltip>
+        <h2>{params.level}</h2>
+      </div>
       {sameLevelItems.length === 0 && activeIndex === 0 && (
         <div>There is no word in this level!</div>
       )}
       {sameLevelItems.length > 0 && activeIndex < sameLevelItems.length && (
-        <div>
-          <div className={classes["flashcards-content"]}>
-            <StudyingWord
-              key={sameLevelItems[activeIndex]["word"]}
-              word={sameLevelItems[activeIndex]["word"]}
-              phonetic={sameLevelItems[activeIndex]["phonetic"]}
-              meaning={sameLevelItems[activeIndex]["meaning"]}
-            />
-          </div>
+        <div className={classes["flashcards-content"]}>
+          <StudyingWord
+            key={sameLevelItems[activeIndex]["word"]}
+            word={sameLevelItems[activeIndex]["word"]}
+            phonetic={sameLevelItems[activeIndex]["phonetic"]}
+            note={sameLevelItems[activeIndex]["note"]}
+            audio={sameLevelItems[activeIndex]["audio"]}
+            meaning={sameLevelItems[activeIndex]["meaning"]}
+          />
           <div className={classes["flashcard-actions"]}>
             <button
               onClick={() =>
                 correctAnswerHandler(sameLevelItems[activeIndex]["word"])
               }
+              className={classes.correct}
             >
-              IK
+              <HiOutlineCheck />
             </button>
             <button
               onClick={() =>
                 wrongAnswerHandler(sameLevelItems[activeIndex]["word"])
               }
+              className={classes.wrong}
             >
-              IDK
+              <HiX />
             </button>
           </div>
         </div>

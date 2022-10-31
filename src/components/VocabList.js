@@ -1,15 +1,18 @@
 import { useSelector } from "react-redux";
 
+import Vocabulary from "./Vocabulary";
+import classes from './VocabList.module.css';
+
 const VocabularyList = () => {
   const items = useSelector((state) => state.items.words);
   let vocabulary = (
-    <ul>
+    <ul className={classes.list}>
       {items.map((element) => {
-        return <li key={element.word}>{element.word}</li>;
+        return <li key={element.word}><Vocabulary item={element} /></li>;
       })}
     </ul>
   );
 
-  return <div>{items.length > 0 && vocabulary}</div>;
+  return <div className={classes['vocabulary_list']}>{items.length > 0 && vocabulary}</div>;
 };
 export default VocabularyList;

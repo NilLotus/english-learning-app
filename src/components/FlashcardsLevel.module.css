@@ -1,11 +1,58 @@
+.page-title{
+    display: flex;
+    align-items: center;
+}
+.back-btn{
+    display: flex;
+    padding: 0 4px 0;
+    cursor: pointer;
+}
+.back-btn svg{
+    font-size: 19px;
+    color: gray;
+}
+.back-btn:hover svg{
+    color: #000;
+}
 .flashcards-content{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px;
 }
 .flashcard-actions{
+    width: 250px;
+    margin: 24px 0;
     display: flex;
-    width: 100%;
-    height: 60px;
-    justify-content: center;
-    align-items: center;
+    flex-shrink: 1;
+}
+.flashcard-actions button{
+    width: 50%;
+    box-sizing: border-box;
+    height: 40px;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+}
+.flashcard-actions svg {
+    font-size: 20px;
+    color: gray;
+}
+.correct{
+    margin-right: 4px;
+    background: #55c662;
+}
+.wrong{
+    margin-left: 4px;
+    background: #f85656;
+}
+.correct:hover {
+    filter: brightness(60%);
+    color: #fff
+}
+.wrong:hover{
+    filter: brightness(60%);
+}
+.correct:hover svg, .wrong:hover svg{
+    color: #fff;
 }

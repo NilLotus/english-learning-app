@@ -22,37 +22,35 @@ const Pronunciation = (props) => {
 
   const addToFlashcardsHandler = () => {
     !clicked && setClicked(true);
-    AuthCtx.check()
-      .then(() => {
-        const itemIndex = items.findIndex((item) => {
-          return item.word === props.word;
-        });
-
-        if (itemIndex < 0) {
-          dispatch(
-            sendFlashcardsData({
-              word: props.word,
-              level: 0,
-              correct: 0,
-              wrong: 0,
-              view: 0,
-              phonetic: props.phonetics[0],
-              meaning: props.wordMeanings.map((i) => [
-                i.partOfSpeech,
-                i.definitions[0]["definition"],
-              ]),
-            })
-          );
-        } else {
-          setShowModal(true);
-        }
-      })
-      .catch((e) => {
-        const location = history.location.pathname;
-        history.push("/sign-in?path=" + location);
-        // TODO: show the reason and error
-        console.log(e);
+    if (AuthCtx.check()) {
+      const itemIndex = items.findIndex((item) => {
+        return item.word === props.word;
       });
+
+      if (itemIndex < 0) {
+        dispatch(
+          sendFlashcardsData({
+            word: props.word,
+            note: "",
+            level: 0,
+            correct: 0,
+            wrong: 0,
+            view: 0,
+            audio: props.pronunciations[0],
+            phonetic: props.phonetics[0],
+            meaning: props.wordMeanings.map((i) => [
+              i.partOfSpeech,
+              i.definitions[0]["definition"],
+            ]),
+          })
+        );
+      } else {
+        setShowModal(true);
+      }
+    } else {
+      const location = history.location.pathname;
+      history.push("/sign-in?path=" + location);
+    }
   };
   const closeModalHandler = () => {
     setShowModal(false);

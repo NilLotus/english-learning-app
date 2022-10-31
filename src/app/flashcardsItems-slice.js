@@ -17,6 +17,12 @@ export const flashcardsItemsSlice = createSlice({
       state.userId = null;
       state.isLoading = false
     },
+    remove(state,action){
+      const itemIndex = state.words.findIndex((item) => {
+        return item.word === action.payload;
+      });
+      state.words.splice(itemIndex,1)
+    },
     correct(state, action) {
       const itemIndex = state.words.findIndex((item) => {
         return item.word === action.payload;
@@ -45,6 +51,11 @@ export const flashcardsItemsSlice = createSlice({
           state.words[itemIndex]["wrong"] + state.words[itemIndex]["correct"],
       };
     },
+    updateNote(state, action){
+      const index = state.words.findIndex(i => i.key ===action.payload['key']);
+      const newNote = action.payload['note'];
+      state.words[index]['note'] = newNote
+    }
   },
 });
 

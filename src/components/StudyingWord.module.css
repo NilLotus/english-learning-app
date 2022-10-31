@@ -1,9 +1,50 @@
 .flashcards-item{
+    position: relative;
     width: 250px;
     min-width: 250px;
     height: 350px;
-    border: 1px solid gray;
     padding: 12px;
-    margin: 8px 4px;
     box-sizing: border-box;
+    background: #c7c7cb8a;
+    border-radius: 4px;
 }
+.front{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+.front h2{
+    margin: 8px 0;
+    text-transform: capitalize;
+}
+/* .meaning{} */
+.back{
+    height: 100%;
+}
+.audio{
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 26px;
+    border-radius: 50%;
+    padding: 5px;
+}
+.meaning{
+    margin-bottom: 12px;
+    line-height: 26px;
+}
+.meaning-title{
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: capitalize;
+    padding-right: 8px;
+}
+.definition{
+    font-size: 14px;
+    font-weight: 400;
+    color: #585353;
+} 

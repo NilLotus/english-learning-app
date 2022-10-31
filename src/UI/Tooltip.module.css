@@ -12,7 +12,8 @@
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  width: auto;
+  white-space: nowrap;
+  font-size: 12px;
 }
 .tooltip:hover .tooltip-text{
     visibility: visible;
