@@ -7,8 +7,8 @@ import AuthContext from "./store/Auth-context";
 import AllNotesPage from "./pages/AllNotes";
 import AllStoriesPage from "./pages/AllStories";
 import DashboardPage from "./pages/DashboardPage";
-import DictionaryPage from "./pages/DictionaryPage";
-import FlashcardsPage from "./pages/Flashcards";
+import Dictionary from "./components/Dictionary";
+import Flashcards from "./components/Flashcards";
 import NewNotePage from "./pages/NewNote";
 import NotFoundPage from "./pages/NotFound";
 import StoryPage from "./pages/Story";
@@ -23,7 +23,6 @@ const App = () => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.items.words)
   const ctx = useContext(AuthContext);
-  console.log(items);
   const isLoading = useSelector(state => state.items.isLoading);
   const check = ctx.check();
 
@@ -39,13 +38,13 @@ const App = () => {
         <DashboardPage />
       </Route>
       <Route path="/dictionary/:word?">
-        <DictionaryPage />
+        <Dictionary />
       </Route>
       <PrivateRoute path='/flashcards/practice/:level'>
         <FlashcardsLevel />
       </PrivateRoute>
       <PrivateRoute path="/flashcards" >
-        <FlashcardsPage />
+        <Flashcards />
       </PrivateRoute>
       <PrivateRoute path="/notes">
         <AllNotesPage />
