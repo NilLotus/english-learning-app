@@ -9,8 +9,10 @@ import { sendFlashcardsData } from "../app/flashcardsData-actions";
 import AuthContext from "../store/Auth-context";
 import Tooltip from "../UI/Tooltip";
 import classes from "./Pronunciation.module.css";
+import Modal from "../UI/Modal";
 
 const Pronunciation = (props) => {
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const AuthCtx = useContext(AuthContext);
   const history = useHistory();
@@ -22,25 +24,8 @@ const Pronunciation = (props) => {
     !clicked && setClicked(true);
     AuthCtx.check()
       .then(() => {
-        dispatch(
-          flashcardsActions.add({
-            word: props.word,
-            level: 0,
-            correct: 0,
-            wrong: 0,
-            view: 0,
-            inactiveTime: null,
-            id: props.word !== "" && props.word,
-            phonetic: props.phonetics[0],
-            meaning: props.wordMeanings.map((i) => [
-              i.partOfSpeech,
-              i.definitions[0]["definition"],
-            ]),
-          })
-        );
-
         const itemIndex = items.findIndex((item) => {
-          return item.id === props.word;
+          return item.word === props.word;
         });
 
         if (itemIndex < 0) {
@@ -51,7 +36,6 @@ const Pronunciation = (props) => {
               correct: 0,
               wrong: 0,
               view: 0,
-              id: props.word !== "" && props.word,
               phonetic: props.phonetics[0],
               meaning: props.wordMeanings.map((i) => [
                 i.partOfSpeech,
@@ -59,6 +43,8 @@ const Pronunciation = (props) => {
               ]),
             })
           );
+        } else {
+          setShowModal(true);
         }
       })
       .catch((e) => {
@@ -67,6 +53,9 @@ const Pronunciation = (props) => {
         // TODO: show the reason and error
         console.log(e);
       });
+  };
+  const closeModalHandler = () => {
+    setShowModal(false);
   };
   useEffect(() => {
     setClicked(false);
@@ -95,6 +84,13 @@ const Pronunciation = (props) => {
         <span>{props.phonetics.join(" & ")}</span>
         <Audio pronunciations={props.pronunciations} />
       </div>
+      {showModal && (
+        <Modal
+          onClick={closeModalHandler}
+          title="Repetitive Item"
+          message="This word already exists in flashcards"
+        />
+      )}
     </>
   );
 };

@@ -1,17 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import { HiX } from "react-icons/hi";
+import { HiOutlineCheck } from "react-icons/hi";
+import { IoArrowBack } from "react-icons/io5";
 
+import Modal from "../UI/Modal";
+import Tooltip from "../UI/Tooltip";
 import StudyingWord from "./StudyingWord";
 import { flashcardsActions } from "../app/flashcardsItems-slice";
 import { updateFlashcardsData } from "../app/flashcardsData-actions";
 import classes from "./FlashcardsLevel.module.css";
-import Modal from "../UI/Modal";
 
-const FlashcardsLevel = (props) => {
+const FlashcardsLevel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [id, setId] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [word, setWord] = useState(null);
   const params = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -19,13 +23,8 @@ const FlashcardsLevel = (props) => {
   const items = useSelector((state) => state.items.words);
 
   const sameLevelItems = items.filter(
-    (i) => i.level === +params.level.split("")[6] - 1
+    (i) => Math.floor(i.level) === +params.level.split("")[6] - 1
   );
-  useEffect(() => {
-    const item = sameLevelItems.find(item => item.id === id);
-    console.log(item);
-    dispatch(updateFlashcardsData(item))
-  }, [items]);
 
   useEffect(() => {
     activeIndex > 0 && setActiveIndex(activeIndex - 1);
@@ -35,16 +34,20 @@ const FlashcardsLevel = (props) => {
     if (activeIndex === sameLevelItems.length) setShowModal(true);
   }, [activeIndex]);
 
+  useEffect(() => {
+    const item = items.find((item) => item.word === word);
+    !!word && dispatch(updateFlashcardsData(item));
+  }, [items]);
+
   const correctAnswerHandler = (word) => {
-    setId(word)
-    dispatch(flashcardsActions.correct({ word }));
+    setWord(word);
+    dispatch(flashcardsActions.correct(word));
     setActiveIndex((prevState) => prevState + 1);
   };
 
   const wrongAnswerHandler = (word) => {
-    setId(word)
+    setWord(word);
     dispatch(flashcardsActions.wrong(word));
-    items.findIndex((i) => i.id === word);
     setActiveIndex((prevState) => prevState + 1);
   };
 
@@ -60,41 +63,52 @@ const FlashcardsLevel = (props) => {
 
   return (
     <>
-      <h2>{params.level}</h2>
+      <div className={classes["page-title"]}>
+        <Tooltip
+          className={classes["back-btn"]}
+          onClick={backToLevelMenuHandler}
+          title="Back"
+        >
+          <IoArrowBack />
+        </Tooltip>
+        <h2>{params.level}</h2>
+      </div>
       {sameLevelItems.length === 0 && activeIndex === 0 && (
         <div>There is no word in this level!</div>
       )}
       {sameLevelItems.length > 0 && activeIndex < sameLevelItems.length && (
-        <div>
-          <div className={classes["flashcards-content"]}>
-            <StudyingWord
-              key={sameLevelItems[activeIndex]["id"]}
-              word={sameLevelItems[activeIndex]["id"]}
-              phonetic={sameLevelItems[activeIndex]["phonetic"]}
-              meaning={sameLevelItems[activeIndex]["meaning"]}
-            />
-          </div>
+        <div className={classes["flashcards-content"]}>
+          <StudyingWord
+            key={sameLevelItems[activeIndex]["word"]}
+            word={sameLevelItems[activeIndex]["word"]}
+            phonetic={sameLevelItems[activeIndex]["phonetic"]}
+            note={sameLevelItems[activeIndex]["note"]}
+            audio={sameLevelItems[activeIndex]["audio"]}
+            meaning={sameLevelItems[activeIndex]["meaning"]}
+          />
           <div className={classes["flashcard-actions"]}>
             <button
               onClick={() =>
-                correctAnswerHandler(sameLevelItems[activeIndex]["id"])
+                correctAnswerHandler(sameLevelItems[activeIndex]["word"])
               }
+              className={classes.correct}
             >
-              IK
+              <HiOutlineCheck />
             </button>
             <button
               onClick={() =>
-                wrongAnswerHandler(sameLevelItems[activeIndex]["id"])
+                wrongAnswerHandler(sameLevelItems[activeIndex]["word"])
               }
+              className={classes.wrong}
             >
-              IDK
+              <HiX />
             </button>
           </div>
         </div>
       )}
       {showModal &&
         activeIndex === sameLevelItems.length &&
-        !!sameLevelItems.length > 0 && (
+        sameLevelItems.length > 0 && (
           <Modal
             onClick={againReviewHandler}
             title="Completed"
