@@ -13,7 +13,7 @@
   width: 50%;
   position: absolute;
   z-index: 2;
-  background: #fff;
+  background: #f8f8ff;
   border-radius: 5px;
   top: 50%;
   transform: translate(0, -50%);
@@ -22,26 +22,40 @@
   margin: auto;
 }
 .header {
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #bebebe;
   padding: 16px 12px;
   font-size: 18px;
+  font-weight: 500;
 }
 .content {
-  padding: 16px 12px;
-  font-size: 14px;
+  padding: 32px 12px;
+  font-size: 15px;
 }
 .footer {
   justify-content: flex-end;
   display: flex;
-  padding: 18px;
+  padding: 12px;
+}
+.action .confirm-btn {
+  border: none;
+  background: #5a5a8c;
+  color: #f8f8ff;
 }
 .action button {
   font-size: 15px;
-  padding: 8px 12px;
-  background: #838282;
+  padding: 12px 16px;
+  background: transparent;
   border-radius: 4px;
-  border: 1px solid #000;
-  color: #fff;
-  font-size: 15px;
+  border: 1px solid #bebebe;
+  margin: 4px;
   cursor: pointer;
 }
+.confirm-btn:hover{
+  background: #464670;
+}
+.action-btn:hover{
+  background: #5a5a8c33;
+  border-color: #5a5a8c;
+  color: #5a5a8c;
+}
+

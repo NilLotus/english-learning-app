@@ -1,6 +1,6 @@
-import FlashCards from "../components/FlashCards";
+import Flashcards from "../components/Flashcards";
 
-const FlashCardsPage = () =>{
-    return <FlashCards />
+const FlashcardsPage = () =>{
+    return <Flashcards />
 }
-export default FlashCardsPage;
+export default FlashcardsPage;

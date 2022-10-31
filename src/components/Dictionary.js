@@ -6,7 +6,7 @@ import Meanings from "./Meanings";
 import Pronunciation from "./Pronunciation";
 import { IoSearchOutline } from "react-icons/io5";
 import classes from "./Dictionary.module.css";
-import LoginButton from "./LoginButton";
+// import LoginButton from "./LoginButton";
 
 const Dictionary = (props) => {
   const [enteredWord, setEnteredWord] = useState(null);
@@ -37,11 +37,6 @@ const Dictionary = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (enteredWord === inputValue.current.value) {
-        // window.history.pushState(
-        //   null,
-        //   enteredWord,
-        //   `/dictionary/${enteredWord}`
-        // );
         history.push(`/dictionary/${enteredWord}`);
         sendRequest(enteredWord);
       }
@@ -60,11 +55,6 @@ const Dictionary = (props) => {
   const setNewWordHandler = (word) => {
     inputValue.current.value = "";
     setEnteredWord(word);
-    // window.history.pushState(
-    //   null,
-    //   word,
-    //   `/dictionary/${word}`
-    // );
     history.push(`/dictionary/${word}`)
   };
 
@@ -96,7 +86,7 @@ const Dictionary = (props) => {
             <IoSearchOutline className={classes["search-icon"]} />
           </button>
         </div>
-        <LoginButton />
+        {/* <LoginButton /> */}
       </div>
       {wordMeanings.length > 0 && (
         <>

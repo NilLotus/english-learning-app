@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  background: #e2e2ed8a;
+  border-radius: 4px;
+}
+.title {
+  display: flex;
+  align-items: center;
+}
+.word {
+  padding-right: 8px;
+  text-transform: capitalize;
+}
+.update-note {
+  display: flex;
+}
+.add-btn,
+.remove-btn {
+  border: 1px solid;
+  border-color: transparent;
+  background: none;
+  cursor: pointer;
+}
+.update-note svg {
+  font-size: 17px;
+}
+.add-btn:hover svg {
+  fill: #369436;
+}
+.remove-btn:hover svg {
+  fill: #d74242;
+}
+.confirm-btn {
+  border: 1px solid gray;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  background: #fff;
+}
+.input {
+  width: 0px;
+  border: none;
+  outline: none;
+  padding: 0;
+  transition: all 500ms ease;
+}
+.active {
+  width: 150px;
+  border: 1px solid gray;
+  padding-left: 8px;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  transition: all 500ms ease;
+}

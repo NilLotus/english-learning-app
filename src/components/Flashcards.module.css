@@ -1,0 +1,31 @@
+.title{
+    margin-bottom: 16px;
+}
+.tab{
+    margin-bottom: 0;
+    height: calc(100vh - 139px);
+}
+.flashcards_actions{
+    display: flex;
+}
+.link{
+    border-bottom: 1px solid gray;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.link:active{
+    color: #068C4B;
+}
+.active-link{
+    border-color: #1C493C;
+    font-weight: 600;
+    border-width: 3px ;
+}
+.empty{
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,20 @@
+.level{
+    display: flex;
+    color: #000;
+    padding: 24px 16px;
+    background: #e2e2ed8a;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    justify-content: space-between;
+    align-items: center;
+}
+.title{
+    font-size: 24px;
+    font-weight: 500;
+}
+.number{
+    font-size: 28px;
+    color: indigo;
+    font-weight: 700;
+}
+

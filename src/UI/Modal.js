@@ -13,12 +13,17 @@ const Overlay = (props) => {
       <div className={classes.content}>{props.message}</div>
       <footer className={classes.footer}>
         <div className={classes.action}>
-          <button onClick={props.onClick}>{props.firstTextButton ? props.firstTextButton : 'OK'}</button>
           {props.secondOnClick && (
-            <button onClick={props.secondOnClick}>
+            <button
+              className={classes["action-btn"]}
+              onClick={props.secondOnClick}
+            >
               {props.secondTextButton}
             </button>
           )}
+          <button className={classes["confirm-btn"]} onClick={props.onClick}>
+            {props.firstTextButton ? props.firstTextButton : "OK"}
+          </button>
         </div>
       </footer>
     </div>
