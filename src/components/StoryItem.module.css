@@ -1,0 +1,73 @@
+.story-item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: calc(25% - 12px);
+  min-width: 250px;
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0 12px 12px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.image {
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+  filter: grayscale(0.8);
+}
+.description {
+  position: relative;
+  padding: 24px 16px;
+  width: 100%;
+  color: #fff;
+  background: rgba(55, 1, 55, 0.4);
+  backdrop-filter: blur(5px);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+.read-mark{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: -20px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgb(55, 1, 55);
+  font-size: 23px;
+}
+.title {
+  margin-bottom: 12px;
+}
+.writer-detail {
+  font-size: 14px;
+}
+.writer {
+  text-transform: capitalize;
+  padding: 0 8px;
+  font-weight: 500;
+}
+.story-item:hover .image {
+  filter: none;
+}
+@media screen and (max-width:1381px) {
+  .story-item{
+    width: calc(33.33% - 12px);
+  }
+}
+@media screen and (max-width:1120px) {
+  .story-item{
+    width: calc(50% - 12px);
+  }
+}
+@media screen and (max-width:860px) {
+  .story-item{
+    width: calc(100% - 12px);
+  }
+}

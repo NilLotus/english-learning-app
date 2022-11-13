@@ -2,15 +2,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100px;
     background: none;
     border: 1px solid gray;
     height: 34px;
-    color: gray;
-    border-radius: 6px;
-    padding: 5px;
+    color: #000;
+    background: #fff;
+    border-radius: 4px;
+    padding: 4px 12px;
     box-sizing: border-box;
-    position: fixed;
-    right: 20px;
+    margin-bottom: 24px;
+    align-self: baseline;
 }
 .sign-in span{
     font-size: 14px;

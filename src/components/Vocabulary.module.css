@@ -1,7 +1,7 @@
 .container {
   display: flex;
   justify-content: space-between;
-  padding: 8px;
+  padding: 8px 12px;
   background: #e2e2ed8a;
   border-radius: 4px;
 }

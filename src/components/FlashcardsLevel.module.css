@@ -22,37 +22,53 @@
 }
 .flashcard-actions{
     width: 250px;
-    margin: 24px 0;
+    margin: 12px 0;
     display: flex;
     flex-shrink: 1;
 }
 .flashcard-actions button{
     width: 50%;
+    background: none;
     box-sizing: border-box;
     height: 40px;
-    border: none;
-    border-radius: 18px;
+    border-radius: 4px;
     cursor: pointer;
 }
 .flashcard-actions svg {
     font-size: 20px;
-    color: gray;
 }
 .correct{
     margin-right: 4px;
-    background: #55c662;
+    border: 1px solid rgb(168, 195, 168);
+}
+.correct svg{
+    color: #347b34
+}
+.wrong svg{
+    color: #d94848;
 }
 .wrong{
     margin-left: 4px;
-    background: #f85656;
+    border: 1px solid rgb(214, 176, 176);
 }
 .correct:hover {
-    filter: brightness(60%);
-    color: #fff
+    background: #dfefdf;
+    border-color: #bfd5bf
 }
 .wrong:hover{
-    filter: brightness(60%);
+    background: rgb(255 234 234);
+    border-color: rgb(242 196 196)
 }
-.correct:hover svg, .wrong:hover svg{
-    color: #fff;
+.correct:hover svg{
+    color: #00aa00;
+}
+.wrong:hover svg{
+    color: red;
+}
+.empty{
+    height: calc(100vh - 81px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px
 }

@@ -129,7 +129,7 @@ const SignUpPage = (props) => {
         <form onSubmit={formSubmitHandler}>
           <Input
             id={email}
-            label="Your E-mail"
+            label="E-mail"
             type="email"
             value={email}
             onChange={emailChangeHandler}
@@ -140,7 +140,7 @@ const SignUpPage = (props) => {
           />
           <Input
             id={password}
-            label="Set Your Password (7 characters minimum)"
+            label="Password (7 characters minimum)"
             type="password"
             value={password}
             onChange={passwordChangeHandler}

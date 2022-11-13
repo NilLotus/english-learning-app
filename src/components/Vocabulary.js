@@ -43,7 +43,7 @@ const Vocabulary = (props) => {
   return (
     <div className={classes.container}>
       <div className={classes.title}>
-        <h3 className={classes.word}>{props.item.word} </h3>
+        <p className={classes.word}>{props.item.word} </p>
         {props.item.note && <i>( {props.item.note} )</i>}
       </div>
       <div className={classes["update-note"]}>

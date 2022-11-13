@@ -1,14 +1,16 @@
 .sidebar {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 24px;
     position: fixed;
     height: 100vh;
     width: 200px;
     min-width: 200px;
-    background-image: url('../../public/backgroundService.jpg');
+    background-image: url('../assets/images/backgroundService.jpg');
 }
-.sidebar ul{
+.menu-items{
     list-style: none;
-    padding-left: 25px;
     width: 100%;
 }
 .sidebar a{

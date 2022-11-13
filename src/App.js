@@ -1,33 +1,39 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./App.css";
 import AuthContext from "./store/Auth-context";
-import AllNotesPage from "./pages/AllNotes";
-import AllStoriesPage from "./pages/AllStories";
 import DashboardPage from "./pages/DashboardPage";
 import Dictionary from "./components/Dictionary";
 import Flashcards from "./components/Flashcards";
-import NewNotePage from "./pages/NewNote";
 import NotFoundPage from "./pages/NotFound";
-import StoryPage from "./pages/Story";
+import Story from "./components/Story";
 import SignInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
+import Storydetail from "./components/StoryDetail";
 import Layout from "./UI/Layout";
 import PrivateRoute from "./utils/PrivertRoute";
-import { fetchFlashcardsData } from "./app/flashcardsData-actions";
 import FlashcardsLevel from "./components/FlashcardsLevel";
+import { fetchFlashcardsData } from "./app/flashcardsData-actions";
+import { fetchStories } from "./app/story-actions";
 
 const App = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const items = useSelector(state => state.items.words)
+  const stories = useSelector(state => state.story.stories)
   const ctx = useContext(AuthContext);
   const isLoading = useSelector(state => state.items.isLoading);
   const check = ctx.check();
 
   if (items.length === 0 && isLoading) {
     check && dispatch(fetchFlashcardsData());
+  }
+
+  if(stories.length === 0){
+    console.log('lll');
+    dispatch(fetchStories())
   }
   
   return (
@@ -46,17 +52,11 @@ const App = () => {
       <PrivateRoute path="/flashcards" >
         <Flashcards />
       </PrivateRoute>
-      <PrivateRoute path="/notes">
-        <AllNotesPage />
-      </PrivateRoute>
-      <Route path="/new-note">
-        <NewNotePage />
+      <Route path='/stories/:storyId' >
+        <Storydetail/>
       </Route>
       <Route path="/stories">
-        <AllStoriesPage />
-      </Route>
-      <Route path="/stories/:storyName">
-        <StoryPage />
+        <Story stories={stories} />
       </Route>
       <Route path="/sign-in">
         <SignInPage />

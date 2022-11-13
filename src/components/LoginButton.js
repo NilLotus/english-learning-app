@@ -4,9 +4,9 @@ import { Link, useHistory } from "react-router-dom";
 import AuthContext from "../store/Auth-context";
 import classes from './LoginButton.module.css';
 import {
-  IoLogInOutline,
-  IoLogOutOutline,
-} from "react-icons/io5";
+  BiLogInCircle,
+  BiLogOutCircle,
+} from "react-icons/bi";
 
 const LoginButton = () => {
   const AuthCtx = useContext(AuthContext);
@@ -16,18 +16,21 @@ const LoginButton = () => {
   const logoutHandler = () => {
     AuthCtx.logout();
   };
+  const logingHandler =() =>{
+    history.push(`/sign-in?path=${path}`)
+  }
   return (
     <>
       {AuthCtx.isLoggedIn ? (
         <button className={classes["sign-in"]} onClick={logoutHandler}>
           <span>Logout</span>
-          <IoLogInOutline className={classes["login-icon"]} />
+          <BiLogOutCircle className={classes["login-icon"]} />
         </button>
       ) : (
-        <Link className={classes["sign-in"]} to={`/sign-in?path=${path}`}>
+        <button className={classes["sign-in"]} onClick={logingHandler} >
           <span>Login</span>
-          <IoLogOutOutline className={classes["login-icon"]} />
-        </Link>
+          <BiLogInCircle className={classes["login-icon"]} />
+        </button>
       )}
     </>
   );
