@@ -5,7 +5,8 @@
     height: 350px;
     padding: 12px;
     box-sizing: border-box;
-    background: #c7c7cb8a;
+    background: #e2e2ed8a;
+    border: 1px solid #dadafa;
     border-radius: 4px;
 }
 .front{
@@ -19,32 +20,35 @@
     margin: 8px 0;
     text-transform: capitalize;
 }
-/* .meaning{} */
-.back{
-    height: 100%;
-}
 .audio{
     position: absolute;
     right: 12px;
     bottom: 12px;
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(107,107,161, 0.3);
+    color: #6b6ba1;
     font-size: 26px;
     border-radius: 50%;
     padding: 5px;
 }
+.audio:hover{
+    background: #6b6ba1;
+    color: #fff;
+}
+.back{
+    height: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    color: #585353;
+    line-height: 26px;
+}
 .meaning{
     margin-bottom: 12px;
-    line-height: 26px;
 }
 .meaning-title{
     font-weight: bold;
     font-size: 16px;
+    color: #000;
     text-transform: capitalize;
     padding-right: 8px;
 }
-.definition{
-    font-size: 14px;
-    font-weight: 400;
-    color: #585353;
-} 

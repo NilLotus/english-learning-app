@@ -6,7 +6,7 @@
     flex-flow: column;
 }
 .sign-in{
-    width: 50%;
+    width: 300px;
     box-sizing: border-box;
     padding: 32px;
 }
@@ -27,7 +27,7 @@
 }
 
 .toggleForm{
-    width: 50%;
+    width: 300px;
     padding: 0;
     text-align: center;
 }

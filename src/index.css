@@ -6,7 +6,7 @@ a {
   text-decoration: none;
 }
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'openSans', 'iranSans', sans-serif;
 }
 
 code {
@@ -19,5 +19,9 @@ code {
 
 @font-face {
   font-family: 'openSans';
-  src: local('openSans'), url(./assets/fonts/OpenSans-Italic.ttf) format('truetype');
+  src: local('openSans'), url(./assets/fonts/OpenSans.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'iranSans';
+  src: local('iranSans'), url(./assets/fonts/IRANSansWeb.ttf) format('truetype');
 }

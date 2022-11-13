@@ -74,7 +74,7 @@ const FlashcardsLevel = () => {
         <h2>{params.level}</h2>
       </div>
       {sameLevelItems.length === 0 && activeIndex === 0 && (
-        <div>There is no word in this level!</div>
+        <div className={classes.empty}>There is no word in this level !</div>
       )}
       {sameLevelItems.length > 0 && activeIndex < sameLevelItems.length && (
         <div className={classes["flashcards-content"]}>

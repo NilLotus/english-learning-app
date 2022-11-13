@@ -20,19 +20,22 @@ const StudyingWord = (props) => {
 
   const back = (
     <div onClick={meaningToggleHandler} className={classes.back}>
-      <p>{props.note && `Your Note: ${props.note}`}</p>
+      {props.note && (
+        <div className={classes.meaning}>
+          <span className={classes["meaning-title"]}>Your Note:</span>
+          <span>{props.note}</span>
+        </div>
+      )}
       {props.meaning.map((meaning) => {
         return (
           <div className={classes.meaning}>
-            <span className={classes['meaning-title']}>{meaning[0]}:</span>
-            <span className={classes.definition}>{meaning[1]}</span>
+            <span className={classes["meaning-title"]}>{meaning[0]}:</span>
+            <span>{meaning[1]}</span>
           </div>
         );
       })}
     </div>
   );
-
-  
 
   return (
     <div className={classes["flashcards-item"]}>

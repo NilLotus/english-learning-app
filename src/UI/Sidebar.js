@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
 import { IoHomeOutline, IoBookOutline, IoReaderOutline } from "react-icons/io5";
 import { FaSwatchbook } from "react-icons/fa";
-import { MdPostAdd } from "react-icons/md";
 import { ImBook } from "react-icons/im";
+// import {IoReaderOutline } from "react-icons/io5";
+// import { MdPostAdd } from "react-icons/md";
 
+import LoginButton from "../components/LoginButton";
 import classes from "./Sidebar.module.css";
 
 const Sidebar = () => {
   return (
     <nav className={classes.sidebar}>
-      <ul>
+      <ul className={classes['menu-items']}>
         <Link to="/">
           <li>
             <IoHomeOutline />
@@ -34,14 +36,20 @@ const Sidebar = () => {
             <span>Stories</span>
           </li>
         </Link>
-        <Link to="/notes">
+        {/* <Link to="/notes">
           <li>
-            <IoReaderOutline/><span>Notes</span></li>
+            <IoReaderOutline />
+            <span>Notes</span>
+          </li>
         </Link>
         <Link to="/new-note">
-          <li><MdPostAdd/><span>Add Note</span></li>
-        </Link>
+          <li>
+            <MdPostAdd />
+            <span>Add Note</span>
+          </li>
+        </Link> */}
       </ul>
+      <LoginButton />
     </nav>
   );
 };
