@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthContextProvider>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/english-learning-app">
         <App />
       </BrowserRouter>
     </Provider>
