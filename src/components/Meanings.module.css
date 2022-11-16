@@ -1,3 +1,7 @@
-.Definitions{
+.definitions{
     list-style: none;
 }
+.definitions ::selection {
+    background: #e2e2ed8a;
+    color: #b006d6;
+  }
