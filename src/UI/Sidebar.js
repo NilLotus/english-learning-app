@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { IoHomeOutline, IoBookOutline, IoReaderOutline } from "react-icons/io5";
+import { NavLink } from "react-router-dom";
+import { IoBookOutline } from "react-icons/io5";
 import { FaSwatchbook } from "react-icons/fa";
 import { ImBook } from "react-icons/im";
-// import {IoReaderOutline } from "react-icons/io5";
+// import {IoHomeOutline,IoReaderOutline } from "react-icons/io5";
 // import { MdPostAdd } from "react-icons/md";
 
 import LoginButton from "../components/LoginButton";
@@ -11,43 +11,44 @@ import classes from "./Sidebar.module.css";
 const Sidebar = () => {
   return (
     <nav className={classes.sidebar}>
-      <ul className={classes['menu-items']}>
-        <Link to="/">
+      <ul className={classes["menu-items"]}>
+        {/* <NavLink to="/home">
           <li>
             <IoHomeOutline />
             <span>Home</span>
           </li>
-        </Link>
-        <Link to="/dictionary">
-          <li>
+        </NavLink> */}
+        <li>
+        <NavLink activeClassName={classes.active} to="/dictionary">
             <ImBook />
             <span>Dictionary</span>
-          </li>
-        </Link>
-        <Link to="/flashcards">
-          <li>
+          </NavLink>
+        </li>
+        <li>
+        <NavLink activeClassName={classes.active} to="/flashcards">
             <FaSwatchbook />
             <span>Flashcards</span>
-          </li>
-        </Link>
-        <Link to="/stories">
-          <li>
+          </NavLink>
+        </li>
+
+        <li>
+        <NavLink activeClassName={classes.active} to="/stories">
             <IoBookOutline />
             <span>Stories</span>
-          </li>
-        </Link>
-        {/* <Link to="/notes">
+          </NavLink>
+        </li>
+        {/* <NavLink to="/notes">
           <li>
             <IoReaderOutline />
             <span>Notes</span>
           </li>
-        </Link>
-        <Link to="/new-note">
+        </NavLink>
+        <NavLink to="/new-note">
           <li>
             <MdPostAdd />
             <span>Add Note</span>
           </li>
-        </Link> */}
+        </NavLink> */}
       </ul>
       <LoginButton />
     </nav>

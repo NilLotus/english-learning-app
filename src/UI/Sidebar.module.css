@@ -13,14 +13,31 @@
     list-style: none;
     width: 100%;
 }
-.sidebar a{
-    text-decoration: none;
-}
+
 .sidebar li {
-    font-size: 20px;
-    color: #fff;
     padding: 20px 0;
 }
-.sidebar li span{
+
+.sidebar a{
+    text-decoration: none;
+    font-size: 20px;
+    color: rgb(245, 232, 255);
+    display: block;
+    position: relative;
+}
+.sidebar a span{
     padding-left: 10px;
+}
+a.active{
+    color: #fff;
+}
+a.active::before{
+    content: "";
+    width: 4px;
+    transform: translateY(-20px);
+    height: 67px;
+    position: absolute;
+    top: 0;
+    left: -24px;
+    background: cornsilk;
 }

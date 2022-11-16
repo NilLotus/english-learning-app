@@ -59,17 +59,17 @@ const Vocabulary = (props) => {
           }`}
         >
           {isPicked ? (
-            <Tooltip title="Confirm">
+            <Tooltip className={classes.icon} title="Confirm">
               <MdCheck />
             </Tooltip>
           ) : (
-            <Tooltip title="Add Your Note">
+            <Tooltip className={classes.icon} title="Add Your Note">
               <AiOutlineEdit />
             </Tooltip>
           )}
         </button>
         <button onClick={removeWordHandler} className={classes["remove-btn"]}>
-          <Tooltip title="Remove From List">
+          <Tooltip className={classes.icon} title="Remove From List">
             <RiDeleteBin6Line />
           </Tooltip>
         </button>

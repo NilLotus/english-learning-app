@@ -6,7 +6,7 @@ import classes from "./Meanings.module.css";
 
 const Meanings = (props) => {
   const meaningContent = (
-    <ul className={classes.Definitions}>
+    <ul className={classes.definitions}>
       {props.wordMeanings.map((meaning) => {
         const uniqueNumber = Math.random().toString();
         return (
