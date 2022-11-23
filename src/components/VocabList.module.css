@@ -1,10 +1,21 @@
 .list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
 }
-.list li{
-    width: 50%;
-    box-sizing: border-box;
-    padding: 0 4px 8px 4px;
+.list li {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 0 4px 8px 4px;
+}
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+@media screen and (max-width: 905px) {
+  .list li {
+    width: 100%;
+  }
 }

@@ -1,7 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-
-import { flashcardsActions } from "../app/flashcardsItems-slice";
 
 const AuthContext = createContext({
   token: "",

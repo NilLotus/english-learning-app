@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 
-import { updateStories } from "../app/story-actions";
+import {
+  sendStoryDetail,
+  updateStoryDetail
+} from "../app/story-actions";
 import Tooltip from "../UI/Tooltip";
 import classes from "./StoryDetail.module.css";
 
@@ -14,6 +17,7 @@ const Storydetail = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const stories = useSelector((state) => state.story.stories);
+  const storyDetailPerUser = useSelector((state) => state.story.detailPerUser);
   const isLoading = useSelector((state) => state.story.isLoading);
   const storyIndex = stories.findIndex((item) => item.id === params.storyId);
 
@@ -39,9 +43,24 @@ const Storydetail = () => {
   const backToStoriesHandler = () => {
     history.push("/stories");
   };
+  
+  const index = storyDetailPerUser.findIndex(
+    (detail) => detail.id === stories[storyIndex]["id"]
+  );
   const toggleReadHandler = () => {
-    dispatch(updateStories(stories[storyIndex]));
+    if (!!localStorage.getItem("userName")) {
+      if (index >= 0) {
+        dispatch(updateStoryDetail(storyDetailPerUser[index]));
+      } else {
+        dispatch(
+          sendStoryDetail({ id: stories[storyIndex]["id"], read: true })
+        );
+      }
+    } else {
+      history.push(`/sign-in?path=${history.location.pathname}`);
+    }
   };
+
   return (
     !isLoading && (
       <div className={classes["story-detail"]}>
@@ -55,7 +74,8 @@ const Storydetail = () => {
               <IoArrowBack />
             </Tooltip>
             <button className={classes.mark} onClick={toggleReadHandler}>
-              {stories[storyIndex]["read"] ? "Mark as unread" : "Mark as read"}
+              {index > -1 && storyDetailPerUser[index]["read"] ?
+                  "Mark as unread": "Mark as read"}
             </button>
           </div>
           <img className={classes.image} src={stories[storyIndex]["image"]} />
@@ -65,13 +85,18 @@ const Storydetail = () => {
           <div className={classes.font}>
             <div>
               <span>Font Size:</span>
-              <span className={classes['font-size']}>{fontSize - 9}</span>
+              <span className={classes["font-size"]}>{fontSize - 9}</span>
             </div>
             <div className={classes["font-actions"]}>
               <button onClick={decreaseFontSize} disabled={fontSize === 10}>
                 -
               </button>
-              <button className={classes.default} onClick={() => setFontSize(16)}>Default</button>
+              <button
+                className={classes.default}
+                onClick={() => setFontSize(16)}
+              >
+                Default
+              </button>
               <button onClick={increaseFontSize} disabled={fontSize === 36}>
                 +
               </button>

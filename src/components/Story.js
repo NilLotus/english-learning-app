@@ -1,12 +1,11 @@
 import StoryItem from "./StoryItem";
-import Card from "../UI/Card";
 import classes from "./Story.module.css";
 
 const Story = (props) => {
   return (
     <div>
       <h2 className={classes['stories-title']}>Stories</h2>
-      <Card  className={classes.story}>
+      <div  className={classes.story}>
         {props.stories.map((story) => {
           return (
             <StoryItem
@@ -19,7 +18,7 @@ const Story = (props) => {
             />
           );
         })}
-      </Card>
+      </div>
     </div>
   );
 };

@@ -19,14 +19,15 @@
 }
 
 .sidebar a{
+    display: flex;
+    align-items: center;
     text-decoration: none;
     font-size: 20px;
     color: rgb(245, 232, 255);
-    display: block;
     position: relative;
 }
 .sidebar a span{
-    padding-left: 10px;
+    padding-left: 24px;
 }
 a.active{
     color: #fff;

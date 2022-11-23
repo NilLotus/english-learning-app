@@ -9,7 +9,7 @@ export const fetchFlashcardsData = () => {
   } else return;
   return async (dispatch) => {
     const fetchRequest = async () => {
-      const response = await fetch(url + userId + ".json");
+      const response = await fetch(url + 'users/' + userId  + '/flashcards'+ ".json");
       if (!response.ok) {
         throw new Error("Something went wrong in fetching data!");
       }
@@ -42,7 +42,7 @@ export const sendFlashcardsData = (item) => {
   }
   return async (dispatch) => {
     const sendRequest = async () => {
-      const response = await fetch(url + userId + ".json", {
+      const response = await fetch(url + 'users/' + userId + '/flashcards/' + ".json", {
         method: "POST",
         body: JSON.stringify(item),
         headers: {
@@ -71,7 +71,7 @@ export const updateFlashcardsData = (item) => {
     const updateRequest = async () => {
       const newItem = { ...item };
       delete newItem.key;
-      const response = await fetch(url + userId + "/" + item.key + ".json", {
+      const response = await fetch(url + 'users/' + userId + "/flashcards/" + item.key + ".json", {
         method: "PUT",
         body: JSON.stringify(newItem),
         headers: {
@@ -95,7 +95,7 @@ export const deleteFlashcardsItem = (item) => {
   }
   return async () => {
     const deleteRequest = async () => {
-      const response = await fetch(url + userId + "/" + item.key + ".json", {
+      const response = await fetch(url + 'users/' + userId + "/flashcards/" + item.key + ".json", {
         method: "DELETE",
         body: JSON.stringify(item),
         headers: {

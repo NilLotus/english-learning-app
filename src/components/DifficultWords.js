@@ -19,23 +19,28 @@ const DifficultWords = () => {
         key={i.word}
         onClick={() => linkToDictionaryHandler(i.word)}
       >
-        <a>
-        {i.word}
-        </a>
+        <a>{i.word}</a>
       </li>
     );
   });
 
   const empty = (
-    <div>
-      There is no word that you have difficulty in memorizing. (Word with more than 5 times saying wrong!)
+    <div className={classes.empty}>
+      <i>
+        There is no word that you have difficulty in memorizing. (Word with more
+        than 5 times saying wrong!)
+      </i>
     </div>
   );
 
   return (
-    <ul className={classes["difficult-words-content"]}>
-      {newItems.length > 0 ? hasContent : empty}
-    </ul>
+    <>
+      {newItems.length > 0 ? (
+        <ul className={classes["difficult-words-content"]}>{hasContent}</ul>
+      ) : (
+        empty
+      )}
+    </>
   );
 };
 export default DifficultWords;

@@ -15,6 +15,7 @@
   width: 100%;
   height: 400px;
   background-size: cover;
+  background-position: top;
   display: flex;
   align-items: flex-end;
   filter: grayscale(0.8);
@@ -28,7 +29,7 @@
   backdrop-filter: blur(5px);
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
 }
-.read-mark{
+.read-mark {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,18 +57,19 @@
 .story-item:hover .image {
   filter: none;
 }
-@media screen and (max-width:1381px) {
-  .story-item{
+@media screen and (max-width: 1332px) {
+  .story-item {
     width: calc(33.33% - 12px);
   }
 }
-@media screen and (max-width:1120px) {
-  .story-item{
+@media screen and (max-width: 1070px) {
+  .story-item {
     width: calc(50% - 12px);
   }
 }
-@media screen and (max-width:860px) {
-  .story-item{
-    width: calc(100% - 12px);
+@media screen and (max-width: 808px) {
+  .story-item {
+    width: 85%;
+    margin: 0 0 12px;
   }
 }

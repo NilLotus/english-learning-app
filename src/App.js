@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./App.css";
 import AuthContext from "./store/Auth-context";
-// import DashboardPage from "./pages/DashboardPage";
 import Layout from "./UI/Layout";
 import { fetchFlashcardsData } from "./app/flashcardsData-actions";
-import { fetchStories } from "./app/story-actions";
+import { fetchStories, fetchStoryDetail } from "./app/story-actions";
 
 const Dictionary = React.lazy(() => import("./components/Dictionary"));
 const Flashcards = React.lazy(() => import("./components/Flashcards"));
@@ -25,9 +24,14 @@ const App = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.items.words);
   const stories = useSelector((state) => state.story.stories);
+  const storyDetailPerUser = useSelector((state) => state.story.detailPerUser);
   const ctx = useContext(AuthContext);
   const isLoading = useSelector((state) => state.items.isLoading);
   const check = ctx.check();
+
+  if(storyDetailPerUser.length === 0 && localStorage.getItem('userName')){
+    dispatch(fetchStoryDetail())
+  }
 
   if (items.length === 0 && isLoading) {
     check && dispatch(fetchFlashcardsData());
