@@ -19,23 +19,27 @@ const LearnedWords = () => {
         key={i.word}
         onClick={() => linkToDictionaryHandler(i.word)}
       >
-        <a>
-        {i.word}
-        </a>
+        <a>{i.word}</a>
       </li>
     );
   });
 
   const empty = (
-    <div>
-      There is no word to complete all of the levels, so this tab is empty.
+    <div className={classes.empty}>
+      <i>
+        There is no word to complete all of the levels, so this tab is empty.
+      </i>
     </div>
   );
 
   return (
-    <ul className={classes["learned-words-content"]}>
-      {newItems.length > 0 ? hasContent : empty}
-    </ul>
+    <>
+      {newItems.length > 0 ? (
+        <ul className={classes["learned-words-content"]}>{hasContent}</ul>
+      ) : (
+        empty
+      )}
+    </>
   );
 };
 export default LearnedWords;

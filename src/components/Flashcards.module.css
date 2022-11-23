@@ -1,19 +1,20 @@
+.Flashcards{
+    height: calc(100vh - 48px);
+}
 .title{
     margin-bottom: 16px;
-}
-.tab{
-    margin-bottom: 0;
-    height: calc(100vh - 139px);
 }
 .flashcards_actions{
     display: flex;
 }
 .link{
     border-bottom: 1px solid gray;
-    padding: 8px 12px;
+    padding: 0 12px 16px 12px;
     margin-bottom: 16px;
     box-sizing: border-box;
     text-align: center;
+    font-size: 17px;
+    word-spacing: 3px;
 }
 .link:active{
     color: #068C4B;
@@ -24,8 +25,19 @@
     border-width: 3px ;
 }
 .empty{
-    height: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
+}
+.content{
+    height: calc(100vh - 107px)
+}
+
+@media screen and (max-width: 925px) {
+    .link{
+        letter-spacing: 0;
+        word-spacing: 0;
+        padding:0 6px 12px 6px;
+    }
 }

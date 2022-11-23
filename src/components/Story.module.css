@@ -1,9 +1,15 @@
-.stories-title{
-    margin-bottom: 16px;
+.stories-title {
+  margin-bottom: 16px;
 }
-.story{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin-bottom: 0;
+.story {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-right: -12px;
+}
+@media screen and (max-width: 808px) {
+  .story {
+    flex-direction: column;
+    align-items: center;
+  }
 }
