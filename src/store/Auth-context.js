@@ -31,7 +31,7 @@ export const AuthContextProvider = (props) => {
     setToken(idToken);
     setEmail(email);
     setIsLoggedIn(true);
-    localStorage.setItem("Token", idToken);
+    localStorage.setItem("token", idToken);
     localStorage.setItem("tokenExpireTime", new Date().getTime() + 3600000);
     localStorage.setItem("userName", email);
   };

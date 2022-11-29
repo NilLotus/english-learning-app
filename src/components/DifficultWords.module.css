@@ -10,7 +10,7 @@
     box-sizing: border-box;
     padding: 0 4px 8px 4px;
 }
-.word-box a{
+.word-box p{
     width: 100%;
     box-sizing: border-box;
     display: inline-block;

@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
 import useInput from "../hooks/useInput";
@@ -8,8 +9,9 @@ import Input from "../UI/Input";
 import Modal from "../UI/Modal";
 import classes from "./SignIn.module.css";
 
-const SignInPage = (props) => {
+const SignInPage = () => {
   const authCtx = useContext(AuthContext);
+  const dispatch = useDispatch();
   const history = useHistory();
   const search = history.location.search;
   const prevPath = new URLSearchParams(search).get("path");
@@ -67,13 +69,18 @@ const SignInPage = (props) => {
         },
       }
     );
-    const data = await response.json();
-    if (data["error"] && data["error"]["message"]) {
-      setNotification(true);
-      setErrorMessage(data.error.message);
-      throw new Error(data.error.message);
-    } else {
+    try {
+      const data = await response.json();
+      if (!response.ok) {
+        const error = (data && data.error.message) || response.status;
+        throw new Error(error);
+      }
       authCtx.login(data.idToken, data.email);
+    } catch (error) {
+      console.log(error);
+      setNotification(true);
+      setErrorMessage(error.toString());
+      throw new Error(error);
     }
   };
 
@@ -92,12 +99,11 @@ const SignInPage = (props) => {
       changeShowError(false);
     }
     await sendRequest();
-
     resetEmailInput();
     resetPasswordInput();
-
     history.push(prevPath);
   };
+
   return (
     <div className={classes["signing-page"]}>
       <Card className={classes["sign-in"]}>
@@ -133,7 +139,7 @@ const SignInPage = (props) => {
           <legend>New User?</legend>
         </fieldset>
         <Link className={classes.toggleLink} to="/sign-up">
-          Sign up
+          Sign up on new account
         </Link>
       </div>
       {notification && (
