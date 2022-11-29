@@ -8,7 +8,7 @@ import Input from "../UI/Input";
 import classes from "./SignUp.module.css";
 import Modal from "../UI/Modal";
 
-const SignUpPage = (props) => {
+const SignUpPage = () => {
   const authCtx = useContext(AuthContext);
   const history = useHistory();
   const [notification, setNotification] = useState(false);
@@ -73,10 +73,10 @@ const SignUpPage = (props) => {
   const formIsValid =
      emailIsValid && passwordIsValid && duplicateIsValid;
 
-  const sendRequest = async () => {
+  const sendRequest =async () => {
     setNotification(false);
     let apiKey = "AIzaSyD0iWDZ1ABlsuooDbitUTmj93_GWg8CRyA";
-    const response = await fetch(
+    await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`,
       {
         method: "POST",
@@ -89,15 +89,20 @@ const SignUpPage = (props) => {
           "Content-Type": "application/json",
         },
       }
-    );
-    const data = await response.json();
-    if (data["error"] && data["error"]["message"]) {
-        setNotification(true);
-        setErrorMessage(data.error.message);
-        throw new Error(data.error.message)
-    } else {
+    ).then(async response =>{
+      const data = await response.json();
+      if (!response.ok) {
+        const error = (data && data.error.message) || response.status;
+        console.log(error);
+        return Promise.reject(error);
+      }
       authCtx.signUp(data.idToken,data.email);
-    }
+    })
+    .catch(error =>{
+      setNotification(true);
+      setErrorMessage(error);
+      throw new Error(error);
+    })
   };
 
   const formSubmitHandler = async (event) => {
@@ -112,6 +117,7 @@ const SignUpPage = (props) => {
       changeShowError(false);
     }
     await sendRequest();
+
     resetEmailInput();
     resetPasswordInput();
     resetDuplicateInput();
@@ -167,7 +173,7 @@ const SignUpPage = (props) => {
         <fieldset>
           <legend>Do you already have an account?</legend>
         </fieldset>
-        <Link className={classes.toggleLink} to='/sign-in' >Loging on your account</Link>
+        <Link className={classes.toggleLink} to='/sign-in' >Login on your account</Link>
       </div>
       {notification && <Modal title='Error' message={errorMessage} onClick={closeModalHandler} />}
     </div>

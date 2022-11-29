@@ -19,7 +19,7 @@ const DifficultWords = () => {
         key={i.word}
         onClick={() => linkToDictionaryHandler(i.word)}
       >
-        <a>{i.word}</a>
+        <p>{i.word}</p>
       </li>
     );
   });

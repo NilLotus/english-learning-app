@@ -3,7 +3,6 @@ import { NavLink, Switch, useLocation } from "react-router-dom";
 import PrivateRoute from "../utils/PrivertRoute";
 import LevelList from "./LevelList";
 import VocabularyList from "./VocabList";
-import Card from "../UI/Card";
 import LearnedWords from "./LearnedWords";
 import DifficultWords from "./DifficultWords";
 import classes from "./Flashcards.module.css";
@@ -21,8 +20,6 @@ const Flashcards = () => {
 
   return (
     <div className={classes.Flashcards}>
-      {/* <h2 className={classes.title}>FlashCards</h2> */}
-      {/* <Card className={classes.tab}> */}
       <div className={classes["flashcards_actions"]}>
         <NavLink
           activeClassName={classes["active-link"]}
@@ -82,7 +79,6 @@ const Flashcards = () => {
         </Switch>
       </div>
 
-      {/* </Card> */}
     </div>
   );
 };
