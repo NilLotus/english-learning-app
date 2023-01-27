@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import Guide from "./Guide";
 import classes from "./LearnedWords.module.css";
 
 const LearnedWords = () => {
@@ -32,8 +33,16 @@ const LearnedWords = () => {
     </div>
   );
 
+  const drawerContent = (
+    <>
+      This page contains a list of words that you have recently learned. Items
+      above level 5 will be placed here!
+    </>
+  );
+
   return (
     <>
+      <Guide drawerHeader="Learned Words" drawerContent={drawerContent} />
       {newItems.length > 0 ? (
         <ul className={classes["learned-words-content"]}>{hasContent}</ul>
       ) : (
