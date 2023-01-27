@@ -4,7 +4,6 @@ import { BsBookmarkPlus, BsBookmarkCheck } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 
 import Audio from "./Audio";
-import { flashcardsActions } from "../app/flashcardsItems-slice";
 import { sendFlashcardsData } from "../app/flashcardsData-actions";
 import AuthContext from "../store/Auth-context";
 import Tooltip from "../UI/Tooltip";

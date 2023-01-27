@@ -1,0 +1,62 @@
+.backdrop {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  z-index: 1;
+}
+.drawer {
+  width: 400px;
+  height: 100vh;
+  z-index: 2;
+  position: fixed;
+  right: 0;
+  box-sizing: border-box;
+  background: #fff;
+  transform: translateX(100%);
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 500;
+  border-bottom: 1px solid #ccc8c8;
+  padding: 20px 24px;
+}
+.close-btn {
+  border: none;
+  background: none;
+  font-size: 22px;
+  display: flex;
+  cursor: pointer;
+}
+.content {
+  padding: 16px 24px;
+  color: #929292;
+    font-weight: 400;
+}
+.content ol, .content ul {
+  padding-left: 16px;
+    
+}
+.content li {
+  margin-bottom: 24px;
+}
+.fade-enter {
+  transform: translateX(0);
+  transition: all 0.3s ease-in-out;
+}
+.fade-enter-done {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-exit {
+  opacity: 1;
+  transform: translateX(100%);
+  transition: all 0.3s ease-in-out;
+}
+.fade-exit-done {
+  opacity: 0;
+  transform: translateX(100%);
+}

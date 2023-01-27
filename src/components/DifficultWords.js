@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import Guide from "./Guide";
 import classes from "./DifficultWords.module.css";
 
 const DifficultWords = () => {
@@ -33,8 +34,16 @@ const DifficultWords = () => {
     </div>
   );
 
+  const drawerContent = (
+    <>
+        This page contains a list of elusive words that you can't recall or
+        guess the meaning of after three attempts.
+    </>
+  );
+
   return (
     <>
+      <Guide drawerHeader="Difficult Words" drawerContent={drawerContent} />
       {newItems.length > 0 ? (
         <ul className={classes["difficult-words-content"]}>{hasContent}</ul>
       ) : (

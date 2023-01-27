@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useLocation, useHistory } from "react-router-dom";
+import { IoSearchOutline } from "react-icons/io5";
+import { BsBookmarkPlus, BsBookmarkCheck } from "react-icons/bs";
 
 import useHttp from "../hooks/httpHook";
 import Meanings from "./Meanings";
 import Pronunciation from "./Pronunciation";
-import { IoSearchOutline } from "react-icons/io5";
+import Guide from "./Guide";
 import classes from "./Dictionary.module.css";
-// import LoginButton from "./LoginButton";
 
 const Dictionary = (props) => {
   const [enteredWord, setEnteredWord] = useState(null);
@@ -14,7 +15,7 @@ const Dictionary = (props) => {
   const params = useParams();
 
   const location = useLocation();
-  const history = useHistory()
+  const history = useHistory();
 
   const inputValue = useRef();
   const {
@@ -55,7 +56,7 @@ const Dictionary = (props) => {
   const setNewWordHandler = (word) => {
     inputValue.current.value = "";
     setEnteredWord(word);
-    history.push(`/dictionary/${word}`)
+    history.push(`/dictionary/${word}`);
   };
 
   useEffect(() => {
@@ -71,7 +72,19 @@ const Dictionary = (props) => {
   const searchHandler = () => {
     setEnteredWord(inputValue);
   };
-  
+  const drawerContent = (
+    <ol>
+      <li>
+      To add an item to flashcards, you must first log in to the application, as flashcards items are unique to each user.
+      </li>
+      <li>
+      After searching for a word definition, the main word appears in a large and bold font. Click on <BsBookmarkPlus /> icon
+      </li>
+      <li>
+        When the icon changes to this <BsBookmarkCheck />, it indicates that you have successfully added this item to your flashcard records.
+      </li>
+    </ol>
+  );
   return (
     <>
       <div className={classes.navbar}>
@@ -86,8 +99,11 @@ const Dictionary = (props) => {
             <IoSearchOutline className={classes["search-icon"]} />
           </button>
         </div>
-        {/* <LoginButton /> */}
       </div>
+      <Guide
+        drawerHeader="Add new words to flashcards"
+        drawerContent={drawerContent}
+      />
       {wordMeanings.length > 0 && (
         <>
           <Pronunciation

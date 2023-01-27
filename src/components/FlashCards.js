@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { NavLink, Switch, useLocation } from "react-router-dom";
 
 import PrivateRoute from "../utils/PrivertRoute";
@@ -5,9 +6,8 @@ import LevelList from "./LevelList";
 import VocabularyList from "./VocabList";
 import LearnedWords from "./LearnedWords";
 import DifficultWords from "./DifficultWords";
+import Guide from "./Guide";
 import classes from "./Flashcards.module.css";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const Flashcards = () => {
   const [hasContent, setHasContent] = useState("");
@@ -78,7 +78,6 @@ const Flashcards = () => {
           </PrivateRoute>
         </Switch>
       </div>
-
     </div>
   );
 };

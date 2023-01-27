@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
 import useInput from "../hooks/useInput";
@@ -11,7 +10,6 @@ import classes from "./SignIn.module.css";
 
 const SignInPage = () => {
   const authCtx = useContext(AuthContext);
-  const dispatch = useDispatch();
   const history = useHistory();
   const search = history.location.search;
   const prevPath = new URLSearchParams(search).get("path");

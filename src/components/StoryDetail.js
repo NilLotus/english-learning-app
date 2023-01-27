@@ -78,7 +78,7 @@ const Storydetail = () => {
                   "Mark as unread": "Mark as read"}
             </button>
           </div>
-          <img className={classes.image} src={stories[storyIndex]["image"]} />
+          <img className={classes.image} alt='' src={stories[storyIndex]["image"]} />
           <audio className={classes.audio} controls>
             <source src={stories[storyIndex]["audio"]} />
           </audio>

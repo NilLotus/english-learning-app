@@ -1,0 +1,46 @@
+.help {
+  color: rebeccapurple;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  font-size: 32px;
+  cursor: pointer;
+  animation: helpBuzz 1s ease-out;
+}
+@keyframes helpBuzz {
+  20% {
+    font-size: 36px;
+    transform: rotate(-42deg);
+    filter: drop-shadow(0px 0px 1px rgba(110 0 220 / 0.5));
+  }
+  50% {
+    font-size: 36px;
+    transform: rotate(50deg);
+    filter: drop-shadow(0px 0px 2px rgb(110 0 220 / 0.6));
+  }
+  80% {
+    font-size: 36px;
+    filter: drop-shadow(0px 0px 1px rgb(110 0 220 / 0.5));
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
